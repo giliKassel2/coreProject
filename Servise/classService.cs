@@ -1,10 +1,11 @@
 using MyProject.models;
 using myProject.Controllers;
+using myProject.Interfaces;
 namespace myProject.Servise;
-public static class ClassService
+public  class ClassService : IClasService
 {
-    private static List<Student> clas;
-    static ClassService()
+    private  List<Student> clas;
+     ClassService()
     {
         clas = new List<Student>{
             new Student { id = 100 , name = "gili kassel" },
@@ -16,16 +17,16 @@ public static class ClassService
         };
     }
 
-    public static List<Student> Get(){
+    public  List<Student> Get(){
         return clas;
     }
 
-    public static Student Get(int id){
+    public  Student Get(int id){
         Student currentStudent = clas.FirstOrDefault(s => s.id == id);
         return currentStudent;
     }
 
-    public static int Insert(Student s ){
+    public  int Insert(Student s ){
         if (isEmpty(s)){
              return -1;
         }
@@ -38,7 +39,7 @@ public static class ClassService
         return s.id;
     }
 
-    public static bool UpDate(int id , Student s){
+    public  bool UpDate(int id , Student s){
         if (isEmpty(s))
             return false;
         
@@ -52,7 +53,7 @@ public static class ClassService
         return true;
     }
 
-    public static bool Delete( int id){
+    public  bool Delete( int id){
         Student currentStudent = clas.FirstOrDefault(s => s.id == id);
         if(currentStudent ==null)
         return false;
@@ -62,7 +63,7 @@ public static class ClassService
         return true;
     }
 
-      public static bool isEmpty(Student  s)
+      public  bool isEmpty(Student  s)
     {
         return s == null || string.IsNullOrWhiteSpace (s.name);
     }
