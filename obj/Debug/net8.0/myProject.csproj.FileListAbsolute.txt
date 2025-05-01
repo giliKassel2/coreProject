@@ -1,17 +1,69 @@
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\appsettings.Development.json
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\appsettings.json
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\myProject.staticwebassets.endpoints.json
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\myProject.exe
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\myProject.deps.json
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\myProject.runtimeconfig.json
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\myProject.dll
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\myProject.pdb
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\Microsoft.OpenApi.dll
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\💻📒📑📄📌⌛\core\myProject\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.csproj.AssemblyReference.cache
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.GeneratedMSBuildEditorConfig.editorconfig
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.AssemblyInfoInputs.cache
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.AssemblyInfo.cs
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.csproj.CoreCompileInputs.cache
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.MvcApplicationPartsAssemblyInfo.cs
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.MvcApplicationPartsAssemblyInfo.cache
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.sourcelink.json
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\scopedcss\bundle\myProject.styles.css
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\staticwebassets.build.json
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\staticwebassets.development.json
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\staticwebassets\msbuild.myProject.Microsoft.AspNetCore.StaticWebAssets.props
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\staticwebassets\msbuild.myProject.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\staticwebassets\msbuild.build.myProject.props
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.myProject.props
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.myProject.props
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\staticwebassets.pack.json
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.csproj.Up2Date
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.dll
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\refint\myProject.dll
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.pdb
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\myProject.genruntimeconfig.cache
+E:\💻📒📑📄📌⌛\core\myProject\obj\Debug\net8.0\ref\myProject.dll
+Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.csproj.AssemblyReference.cache
+Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.GeneratedMSBuildEditorConfig.editorconfig
+Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.AssemblyInfoInputs.cache
+Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.AssemblyInfo.cs
+Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.csproj.CoreCompileInputs.cache
+Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.MvcApplicationPartsAssemblyInfo.cs
+Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.MvcApplicationPartsAssemblyInfo.cache
+Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.sourcelink.json
 Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\appsettings.Development.json
 Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\appsettings.json
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Data\classData.json
 Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\myProject.staticwebassets.endpoints.json
 Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\myProject.exe
 Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\myProject.deps.json
 Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\myProject.runtimeconfig.json
 Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\myProject.dll
 Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\myProject.pdb
-Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.GeneratedMSBuildEditorConfig.editorconfig
-Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.AssemblyInfoInputs.cache
-Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.AssemblyInfo.cs
-Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.csproj.CoreCompileInputs.cache
-Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.MvcApplicationPartsAssemblyInfo.cache
-Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.sourcelink.json
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Microsoft.Bcl.Memory.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Microsoft.OpenApi.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\scopedcss\bundle\myProject.styles.css
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\staticwebassets.build.json
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\staticwebassets.development.json
@@ -22,15 +74,9 @@ Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\staticwebassets\msbuild.bui
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.myProject.props
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.myProject.props
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\staticwebassets.pack.json
+Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.csproj.Up2Date
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.dll
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\refint\myProject.dll
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.pdb
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.genruntimeconfig.cache
 Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\ref\myProject.dll
-Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Microsoft.OpenApi.dll
-Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
-Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-Z:\B\קסל גילה\core\myProject\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.csproj.AssemblyReference.cache
-Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.MvcApplicationPartsAssemblyInfo.cs
-Z:\B\קסל גילה\core\myProject\obj\Debug\net8.0\myProject.csproj.Up2Date
