@@ -10,11 +10,16 @@ using myProject.Interfaces;
 namespace myProject.Services
 {
     public class CreateTokenService
+
+
+
     {
         //ECDsa ecdsa = ECDsa.Create();
         private static SymmetricSecurityKey key = new SymmetricSecurityKey(
                  Encoding.UTF8.GetBytes("hihowareyougili&&&batihere"));
         private static string issuer = "https://poh.education.gov";
+
+       
 
 
         public static SecurityToken GetToken(List<Claim> claims) =>
