@@ -1,0 +1,25 @@
+# Ignore build output directories
+bin/
+obj/
+
+# Ignore author-specific files
+*.author
+*.suo
+*.authorosscache
+*.sln.docstates
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore NuGet packages
+*.nupkg
+*.snupkg
+packages/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore Visual Studio working files
+.vs/
