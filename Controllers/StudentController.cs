@@ -18,7 +18,6 @@ namespace myProject.Controllers
         {
             return service.Get();
         }
-
         [HttpGet("{id}")]
         public ActionResult<Student> Get(int id){
             Student s = service.Get(s => s.Id == id);
@@ -50,7 +49,6 @@ namespace myProject.Controllers
         }
 
         [HttpDelete("{id}")]
-
         public ActionResult Delete(int id)
         {
             if(service.Delete(s =>s.Id == id)){

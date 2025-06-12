@@ -58,6 +58,7 @@ void ConfigureServices(IServiceCollection services)
 
 // Call ConfigureServices before building the app
 ConfigureServices(builder.Services);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -65,6 +66,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
 }
 
 app.UseDefaultFiles();
@@ -75,4 +77,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+    // app.MapOpenApi();
+
+
 app.Run();

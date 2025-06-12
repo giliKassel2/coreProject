@@ -14,7 +14,7 @@ namespace myProject.Controllers
             this.service = service;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<Teacher>> Get()
+        public ActionResult<IEnumerable<Teacher>>? Get()
         {
             return service.Get();
         }
@@ -24,7 +24,6 @@ namespace myProject.Controllers
             Teacher s = service.Get(s => s.Id == id);
             if(s == null)
                 return NotFound();
-
             return s;
         }
 

@@ -7,16 +7,16 @@ using myProject.Interfaces;
 
 
 
-namespace myProject.Services
-{
+namespace myProject.Services;
+
     public class CreateTokenService
     {
         //ECDsa ecdsa = ECDsa.Create();
         private static SymmetricSecurityKey key = new SymmetricSecurityKey(
              Encoding.UTF8.GetBytes("hihowareyougili&&&batihere"));
         private static string issuer = "https://poh.education.gov";
-
-
+        
+        //ECDsa ecdsa = ECDsa.Create();
         public static SecurityToken GetToken(List<Claim> claims) =>
         new JwtSecurityToken(
          issuer,
@@ -25,32 +25,28 @@ namespace myProject.Services
         expires: DateTime.Now.AddDays(1),
         signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha512)
         );
-    
+        public static TokenValidationParameters
+            GetTokenValidationParameters() =>
+            new TokenValidationParameters
+            {
+                ValidIssuer = issuer,
+                ValidAudience = issuer,
+                IssuerSigningKey = key,
+                ClockSkew = TimeSpan.Zero
+            };
+        public static string WriteToken(SecurityToken token) =>
+        new JwtSecurityTokenHandler().WriteToken(token);
 
-    public static TokenValidationParameters
-        GetTokenValidationParameters() =>
-        new TokenValidationParameters
-        {
-            ValidIssuer = issuer,
-            ValidAudience = issuer,
-            IssuerSigningKey = key,
-            ClockSkew = TimeSpan.Zero
-        };
-    public static string WriteToken(SecurityToken token) =>
-            new JwtSecurityTokenHandler().WriteToken(token);        
-}
+    }
+    // List<Claim> claims = new List<Claim>
+    // {
+    //     new Claim(ClaimTypes.Name, "username"),
+    //     new Claim(ClaimTypes.Role, "admin")
+    // };
+
+    // SecurityToken token = LoginService.GetToken(claims);
+    // string tokenString = LoginService.WriteToken(token);
+    // Console.WriteLine(tokenString);
 
 
-
-// List<Claim> claims = new List<Claim>
-// {
-//     new Claim(ClaimTypes.Name, "username"),
-//     new Claim(ClaimTypes.Role, "admin")
-// };
-
-// SecurityToken token = LoginService.GetToken(claims);
-// string tokenString = LoginService.WriteToken(token);
-// Console.WriteLine(tokenString);
-
-}
 

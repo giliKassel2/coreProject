@@ -1,18 +1,47 @@
+
 using System.Security.Claims;
+using myProject.Controllers;
 using myProject.Models;
+using myProject.Servise;
 namespace myProject.Services;
 public class LoginService{
-   public bool Login(User user, HttpContext httpContext)
-{
-    //צריך להוסיף פה בפונקציה את הסיסמא המוצפנת ואת הסיסמא הלא מוצפנת זה מה שצריך לשלוח לו 
-    if (user.Name == "admin" && VerifyPassword(user.Password, ))
+    PasswordService passwordService = new PasswordService();
+
+    public bool Login(User user, HttpContext httpContext)
     {
-        // יצירת טוקן לאחר הצלחה בלוגין
-        var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.PostalCode, ""),
-            new Claim(ClaimTypes.Country, "principal")
-        };
+        List<Claim>claims ;
+        Teacher? RequestTeacher = TeacherService.Get(int.Parse(user.UserId));
+        Student? RequestStudent = StudentService.Get(int.Parse(user.UserId)) ;
+
+        if(RequestTeacher !=null && passwordService.VerifyPassword(user.Password,RequestTeacher.HashPassword)){
+            claims =new List<Claim>();
+            {
+                new Claim(ClaimTypes.PrimarySid,user.UserId );
+            };
+            if(RequestTeacher.Name == "admin"){
+                claims.Add(
+                    new Claim("type","principal"));
+            }
+            else{
+                if(RequestTeacher.Name == "admin"){
+                claims.Add(
+                    new Claim("type","Teacher"));
+                }
+            }
+        }
+        else{
+            if(RequestStudent !=null && passwordService.VerifyPassword(user.Password,RequestTeacher.HashPassword)){
+                claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.PrimarySid,user.UserId ),
+                    new Claim("type","Teacher")
+                };
+            }
+            else{
+                return false;
+            }
+    
+        }
         var token = CreateTokenService.GetToken(claims);
         var tokenString = CreateTokenService.WriteToken(token);
 
@@ -26,10 +55,9 @@ public class LoginService{
 
         return true; 
     }
+            
     
-    return false; 
-}
     private bool saveToken(Claim claim){
-
+        return true;
     }
 }

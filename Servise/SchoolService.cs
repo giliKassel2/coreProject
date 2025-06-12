@@ -6,7 +6,7 @@ using myProject.Models;
 namespace myProject.Servise;
 public class SchoolService : ISchoolService
 {
-    private  List<Student>? students;
+    private List<Student>? students;
     private List<Teacher>? teachers;
     private static string fileStudent = "students.json";
     private static string fileTeacher = "teachers.json";
@@ -37,8 +37,7 @@ public class SchoolService : ISchoolService
         }
         catch (Exception ex){
         Console.WriteLine($"Error saving to JSON: {ex.Message}");
-        }
-        
+        }        
     }
     private void saveTeacherJson(){
         try{
@@ -46,10 +45,9 @@ public class SchoolService : ISchoolService
         }
         catch (Exception ex){
         Console.WriteLine($"Error saving to JSON: {ex.Message}");
-        }
-        
+        }        
     }
-      public  bool isEmpty(Student s)
+      private  bool isEmpty(Student s)
     {
         return s == null || string.IsNullOrWhiteSpace (s.Name);
     }
@@ -65,14 +63,12 @@ public class SchoolService : ISchoolService
 
     public Student? GetStudent(int id)
     {
-        return students.FirstOrDefault(s => s.Id == id);
+        return students.First(s => s.Id == id);
     }
-
     public Teacher? GetTeacher(int id)
     {
         return teachers.FirstOrDefault(t => t.Id == id);
     }
-
     public int InsertTeacher(Teacher teacher)
     {
         if (teacher == null || string.IsNullOrWhiteSpace(teacher.Name))
@@ -84,8 +80,7 @@ public class SchoolService : ISchoolService
         this.teachers.Add(teacher);
         saveTeacherJson();
         return teacher.Id;
-    }
-    
+    }    
     public int InsertStudent(int id, String name)
     {
         Student s = new Student { Id = id, Name = name, presence = new List<Presence>() };
@@ -99,22 +94,18 @@ public class SchoolService : ISchoolService
         System.Console.WriteLine($"After Add: {students.Count}");
         return s.Id;
     }
-
     public bool UpdateStudent(int id, Student s)
     {
         if (isEmpty(s))
-            return false;
-        
+            return false;        
         Student currentStudent = students.FirstOrDefault( s => s.Id == id);
         if(currentStudent == null)
             return false;
-        
         currentStudent.Name = s.Name;
         currentStudent.presence = s.presence;
         saveStudentJson();
         return true;
     }
-
     public bool UpdateTeacher(int id, Teacher t)
     {
         if (t == null || string.IsNullOrWhiteSpace(t.Name))
@@ -129,7 +120,6 @@ public class SchoolService : ISchoolService
         saveTeacherJson();
         return true;
     }
-
     public bool DeleteTeacher(int id)
     {
         Teacher? currentTeacher = GetTeacher(id);
@@ -141,7 +131,6 @@ public class SchoolService : ISchoolService
         saveTeacherJson();
         return true;
     }
-
     public bool DeleteStudent(int id)
     {
         Student currentStudent = GetStudent(id);

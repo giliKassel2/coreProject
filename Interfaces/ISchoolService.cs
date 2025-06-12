@@ -1,5 +1,4 @@
 using myProject.Models;
-using myProject.Models;
 namespace myProject.Interfaces;
 public interface ISchoolService
 {
