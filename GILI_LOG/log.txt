@@ -103,3 +103,5 @@
 /api/Student.GET took 384ms. status:200  Success: True
 /api/Student.GET took 20ms. status:200  Success: True
 
+/js/script.js.GET took 137ms. status:404  Success: True
+/favicon.ico.GET took 4ms. status:404  Success: True

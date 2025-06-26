@@ -33,7 +33,11 @@ namespace myProject.Services;
             }
         }
 
-        public List<T> Get()
+    public GenericService()
+    {
+    }
+
+    public List<T> Get()
         {
             return _entities;
         }

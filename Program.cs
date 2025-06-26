@@ -31,20 +31,15 @@ void ConfigureServices(IServiceCollection services)
         cfg.AddPolicy("student", 
             policy => policy.RequireClaim("type", "Student", "Teacher", "principal"));
     });
-    // // Add services to the container
-    // services.AddScoped<IClasService, ClassService>();
+
     services.AddScoped<StudentService>();
     services.AddScoped<TeacherService>();
 
-
-
-    // Register generic service for students
     services.AddScoped<IGenericService<Student>>(provider =>
         new GenericService<Student>(
             Path.Combine(builder.Environment.ContentRootPath, "Data", "students.json")
         ));
 
-    // Register generic service for teachers
     services.AddScoped<IGenericService<Teacher>>(provider =>
         new GenericService<Teacher>(
             Path.Combine(builder.Environment.ContentRootPath, "Data", "teachers.json")
@@ -52,8 +47,6 @@ void ConfigureServices(IServiceCollection services)
 
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
-    services.AddControllers();
-
 }
 
 // Call ConfigureServices before building the app
@@ -66,7 +59,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
 }
 
 app.UseDefaultFiles();
@@ -74,11 +66,21 @@ app.UseStaticFiles();
 app.UseLog();
 app.UseError();
 app.UseHttpsRedirection();
+
+// Add UseRouting before UseAuthentication and UseAuthorization
+app.UseRouting();
+
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Map controllers
 app.MapControllers();
 
-    // app.MapOpenApi();
+// Map default route for login
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Account}/{action=Login}/{id?}"
+);
 
-
+// Run the application
 app.Run();

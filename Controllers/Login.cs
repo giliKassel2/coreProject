@@ -1,63 +1,31 @@
 
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 using myProject.Controllers;
 using myProject.Models;
 using myProject.Servise;
 namespace myProject.Services;
-public class LoginService{
-    PasswordService passwordService = new PasswordService();
 
-    public bool Login(User user, HttpContext httpContext)
-    {
-        List<Claim>claims ;
-        Teacher? RequestTeacher = TeacherService.Get(int.Parse(user.UserId));
-        Student? RequestStudent = StudentService.Get(int.Parse(user.UserId)) ;
 
-        if(RequestTeacher !=null && passwordService.VerifyPassword(user.Password,RequestTeacher.HashPassword)){
-            claims =new List<Claim>();
-            {
-                new Claim(ClaimTypes.PrimarySid,user.UserId );
-            };
-            if(RequestTeacher.Name == "admin"){
-                claims.Add(
-                    new Claim("type","principal"));
-            }
-            else{
-                if(RequestTeacher.Name == "admin"){
-                claims.Add(
-                    new Claim("type","Teacher"));
-                }
-            }
-        }
-        else{
-            if(RequestStudent !=null && passwordService.VerifyPassword(user.Password,RequestTeacher.HashPassword)){
-                claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.PrimarySid,user.UserId ),
-                    new Claim("type","Teacher")
-                };
-            }
-            else{
-                return false;
-            }
-    
-        }
-        var token = CreateTokenService.GetToken(claims);
-       var tokenString = CreateTokenService.WriteToken(token);
-
-        // הוספת הטוקן ל-Cookie
-        httpContext.Response.Cookies.Append("AuthToken", tokenString, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,   
-            Expires = DateTimeOffset.UtcNow.AddDays(1)
-        });
-
-        return true; 
+public class LoginController : ControllerBase
+{
+    // פעולה להציג את עמוד הלוגין
+    private LoginService loginService;
+    private HttpContext httpContext;
+    public LoginController(LoginService service){
+        this.loginService = service;
     }
-            
     
-    private bool saveToken(Claim claim){
-        return true;
+
+    // פעולה לאימות המשתמש
+    [HttpPost]
+    public IActionResult Login(User user)
+    {
+        if (loginService.Login(user, httpContext))
+        {
+            
+            return RedirectToAction("Index", "Home");
+        }
+        return NotFound(); // החזר את העמוד אם האימות נכשל
     }
 }
