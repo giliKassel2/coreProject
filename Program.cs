@@ -34,6 +34,7 @@ void ConfigureServices(IServiceCollection services)
 
     services.AddScoped<StudentService>();
     services.AddScoped<TeacherService>();
+    services.AddScoped<LoginService>();
 
     services.AddScoped<IGenericService<Student>>(provider =>
         new GenericService<Student>(
@@ -44,6 +45,8 @@ void ConfigureServices(IServiceCollection services)
         new GenericService<Teacher>(
             Path.Combine(builder.Environment.ContentRootPath, "Data", "teachers.json")
         ));
+
+    
 
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
@@ -60,8 +63,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseDefaultFiles();
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path == "/")
+    {
+        context.Response.Redirect("/login.html");
+        return;
+    }
+    await next();
+});
+app.UseDefaultFiles(new DefaultFilesOptions
+{
+    DefaultFileNames = new List<string> { "login.html", "index.html" }
+});
 app.UseStaticFiles();
 app.UseLog();
 app.UseError();
@@ -72,7 +86,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseStaticFiles();
 // Map controllers
 app.MapControllers();
 

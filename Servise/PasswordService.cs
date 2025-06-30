@@ -4,13 +4,10 @@ namespace myProject.Controllers;
 
 public class PasswordService
 {
-    internal static string HashPassword(object password)
-    {
-        throw new NotImplementedException();
-    }
+   
 
     // פונקציה להצפנת הסיסמא
-    public string HashPassword(string password)
+    public static string HashPassword(string password)
     {
         return BCrypt.Net.BCrypt.HashPassword(password);
     }

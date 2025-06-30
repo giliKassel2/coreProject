@@ -7,21 +7,25 @@
     <title>ouer school</title>
 </head>
 <body>
-    <div class="container">
-        <h1>מערכת ניהול תלמידים ומורים</h1>
-        <div id="studentForm">
-            <h2>הוסף תלמידה</h2>
-            <input type="text" id="studentName" placeholder="שם תלמידה">
-            <button onclick="addStudent()">הוסף</button>
-        </div>
-        <div id="teacherForm">
-            <h2>הוסף מורה</h2>
-            <input type="text" id="teacherName" placeholder="שם מורה">
-            <button onclick="addTeacher()">הוסף</button>
-        </div>
-        <div id="output"></div>
-    </div>
-    <script src="js/script.js"></script>
+    
+    <header>
+        <h1>ברוכים הבאים לבית הספר</h1>
+        <img src="school.jpg" alt="תמונה של בית הספר" class="school-image">
+    </header>
+    <main>
+        <section id="teachers">
+            <h2>מורים</h2>
+            <ul id="teacherList"></ul>
+        </section>
+        <section id="students">
+            <h2>תלמידים</h2>
+            <ul id="studentList"></ul>
+        </section>
+    </main>
+    <footer>
+        <p>© 2023 כל הזכויות שמורות</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
 

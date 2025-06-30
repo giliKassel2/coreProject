@@ -5,92 +5,98 @@ using myProject.Interfaces;
 
 namespace myProject.Services;
 
-    public class GenericService<T>:IGenericService<T> 
+public class GenericService<T> : IGenericService<T>
+{
+    private readonly string _filePath;
+    private List<T> _entities;
+
+    public GenericService(string filePath)
     {
-        private readonly string _filePath;
-        private List<T> _entities;
+        _filePath = filePath;
 
-        public GenericService(string filePath)
+        // Load entities from JSON file
+        if (File.Exists(_filePath))
         {
-            _filePath = filePath;
-
-            // Load entities from JSON file
-            if (File.Exists(_filePath))
+            System.Console.WriteLine("tbh ");
+            using (var json = File.OpenText(_filePath))
             {
-                System.Console.WriteLine("tbh ");
-                using (var json = File.OpenText(_filePath))
-                {
-                    _entities = JsonSerializer.Deserialize<List<T>>(json.ReadToEnd(),
-                        new JsonSerializerOptions
-                        {
-                            PropertyNameCaseInsensitive = true
-                        }) ?? new List<T>();
-                }
+                _entities = JsonSerializer.Deserialize<List<T>>(json.ReadToEnd(),
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }) ?? new List<T>();
             }
-            else
-            {
-                _entities = new List<T>();
-            }
+            System.Console.WriteLine(_entities);
         }
+        else
+        {
+            _entities = new List<T>();
+        }
+    }
 
     public GenericService()
     {
     }
 
     public List<T> Get()
-        {
-            return _entities;
-        }
+    {
+        return _entities;
+    }
 
-        public T? Get(Func<T, bool> predicate)
-        {
-            return _entities.FirstOrDefault(predicate);
-        }
+    public T? Get(Func<T, bool> predicate)
+    {
+        //  Console.WriteLine("************************");
+        // foreach (var entity in _entities)
+        // {
+        //     Console.WriteLine(JsonSerializer.Serialize(entity));
+        // }
+        return _entities.FirstOrDefault(predicate);
+    }
 
-        public T Create(T entity)
+    public T Create(T entity)
+    {
+        _entities.Add(entity);
+        SaveToJson();
+        return entity;
+    }
+
+    public T? Update(T entity, Func<T, bool> predicate)
+    {
+        var existingEntity = _entities.FirstOrDefault(predicate);
+        if (existingEntity != null)
         {
-            _entities.Add(entity);
+            var index = _entities.IndexOf(existingEntity);
+            _entities[index] = entity;
             SaveToJson();
-            return entity;
+            return existingEntity;
         }
+        return default(T);
+    }
 
-        public T? Update(T entity, Func<T, bool> predicate)
+    public bool Delete(Func<T, bool> predicate)
+    {
+        var entityToRemove = _entities.FirstOrDefault(predicate);
+        if (entityToRemove != null)
         {
-            var existingEntity = _entities.FirstOrDefault(predicate);
-            if (existingEntity != null)
-            {
-                var index = _entities.IndexOf(existingEntity);
-                _entities[index] = entity;
-                SaveToJson();
-                return existingEntity;
-            }
-            return default(T);
+            _entities.Remove(entityToRemove);
+            SaveToJson();
+            return true;
         }
+        return false;
+    }
 
-        public bool Delete(Func<T, bool> predicate)
+    private void SaveToJson()
+    {
+        try
         {
-            var entityToRemove = _entities.FirstOrDefault(predicate);
-            if (entityToRemove != null)
-            {
-                _entities.Remove(entityToRemove);
-                SaveToJson();
-                return true;
-            }
-            return false;
+            File.WriteAllText(_filePath, JsonSerializer.Serialize(_entities, new JsonSerializerOptions { WriteIndented = true }));
         }
-
-        private void SaveToJson()
+        catch (Exception ex)
         {
-            try
-            {
-                File.WriteAllText(_filePath, JsonSerializer.Serialize(_entities, new JsonSerializerOptions { WriteIndented = true }));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error saving to JSON: {ex.Message}");
-            }
+            Console.WriteLine($"Error saving to JSON: {ex.Message}");
         }
+    }
 
 
-   
+
 }

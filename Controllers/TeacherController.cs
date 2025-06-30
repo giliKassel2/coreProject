@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using myProject.Models;
 using myProject.Services;
 using myProject.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace myProject.Controllers
 {
@@ -13,6 +14,7 @@ namespace myProject.Controllers
         public TeachersController(TeacherService service){
             this.service = service;
         }
+        [Authorize(Policy = "principal")]
         [HttpGet]
         public ActionResult<IEnumerable<Teacher>>? Get()
         {

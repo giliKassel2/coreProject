@@ -5,7 +5,7 @@ using myProject.Controllers;
 namespace myProject.Services;
 
     public class TeacherService:GenericService<Teacher>{
-    public TeacherService(IHostEnvironment env) : base( "StudentData.json")
+    public TeacherService(IHostEnvironment env) : base( "Data/TeacherData.json")
         {
             
         }

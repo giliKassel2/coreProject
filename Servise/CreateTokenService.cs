@@ -13,7 +13,7 @@ namespace myProject.Services;
     {
         //ECDsa ecdsa = ECDsa.Create();
         private static SymmetricSecurityKey key = new SymmetricSecurityKey(
-             Encoding.UTF8.GetBytes("hihowareyougili&&&batihere"));
+     Encoding.UTF8.GetBytes("this_is_a_super_long_secret_key_for_HS512_algorithm_by_Gila_K_&_Bati_M_its_ouer_cre_project"));
         private static string issuer = "https://poh.education.gov";
         
         //ECDsa ecdsa = ECDsa.Create();

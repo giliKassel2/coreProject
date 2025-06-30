@@ -1,8 +1,8 @@
-[{ "Id": 1000, "Name": "gila kassel" },
-    { "Id": 1001, "Name": "chani levi" },
-    { "Id": 1002, "Name": "shoshi cohen" },
-    { "Id": 1003, "Name": "sari lev" },
-    { "Id": 1004, "Name": "chaya shapira" },
-    { "Id": 1005, "Name": "esti altman" },
-    { "Id": 1006, "Name": "bbbbbbbbbbbbbbb" }
+[
+  { "Id": 1000, "HashPassword":"$2a$11$w8Qw8p7Qw6Qw8p7Qw6QwOeQw8p7Qw8p7Qw8p7Qw8p7Qw8p7Qw8p7e", "Name": "admin", "Subject":"" },
+  { "Id": 1000, "HashPassword":"$2b$10$eW5wQw8p7Qw6Qw8p7Qw6QwOQw6Qw8p7Qw6Qw8p7Qw6Qw8p7Qw6Qw8p7", "Name": "gila kassel", "Subject":"english" },
+  { "Id": 1001, "HashPassword":"$2b$10$zXcQw8p7Qw6Qw8p7Qw6QwOQw6Qw8p7Qw6Qw8p7Qw6Qw8p7Qw6Qw8p7", "Name": "chani levi", "Subject":"english" },
+  { "Id": 1002, "HashPassword":"$2b$10$kLmQw8p7Qw6Qw8p7Qw6QwOQw6Qw8p7Qw6Qw8p7Qw6Qw8p7Qw6Qw8p7", "Name": "dani levi", "Subject":"math" },
+  { "Id": 1003, "HashPassword":"$2b$10$yUiQw8p7Qw6Qw8p7Qw6QwOQw6Qw8p7Qw6Qw8p7Qw6Qw8p7Qw6Qw8p7", "Name": "roni levi", "Subject":"math" },
+  { "Id": 1004, "HashPassword":"$2b$10$wErQw8p7Qw6Qw8p7Qw6QwOQw6Qw8p7Qw6Qw8p7Qw6Qw8p7Qw6Qw8p7", "Name": "daniella levi", "Subject":"history" }
 ]

@@ -1,30 +1,33 @@
 
-using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using myProject.Controllers;
 using myProject.Models;
-using myProject.Servise;
-namespace myProject.Services;
+using myProject.Services;
+using myProject.Interfaces;
 
+namespace myProject.Controllers;
 
+[Route("api/[controller]")]
 public class LoginController : ControllerBase
 {
-    // פעולה להציג את עמוד הלוגין
     private LoginService loginService;
-    private HttpContext httpContext;
-    public LoginController(LoginService service){
+    public LoginController(LoginService service)
+    {
         this.loginService = service;
     }
-    
+
 
     // פעולה לאימות המשתמש
     [HttpPost]
     public IActionResult Login(User user)
     {
-        if (loginService.Login(user, httpContext))
+        System.Console.WriteLine("start login post----");
+        if (loginService.Login(user, HttpContext))
         {
+            System.Console.WriteLine("return true");
+            //  return Redirect("\\index.html");
+            var token = HttpContext.Response.Headers["Set-Cookie"];
+            return Ok(new { success = true, cookie = token });
             
-            return RedirectToAction("Index", "Home");
         }
         return NotFound(); // החזר את העמוד אם האימות נכשל
     }
