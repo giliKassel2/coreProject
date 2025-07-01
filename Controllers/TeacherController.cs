@@ -14,7 +14,7 @@ namespace myProject.Controllers
         public TeachersController(TeacherService service){
             this.service = service;
         }
-        [Authorize(Policy = "principal")]
+       // [Authorize(Policy = "principal")]
         [HttpGet]
         public ActionResult<IEnumerable<Teacher>>? Get()
         {
@@ -33,6 +33,10 @@ namespace myProject.Controllers
         public ActionResult Post(Teacher newTeacher)
         {
             Teacher newT= service.Create(newTeacher);
+             if (newT == default)
+            {
+                return BadRequest("Teacher creation failed. Please ensure the teacher has a valid ID and password.");
+            }
             if (newT == null)
                 return BadRequest();
 
@@ -40,15 +44,17 @@ namespace myProject.Controllers
         }
 
 
-        [HttpPut("{id}")]
-        public ActionResult Put(int id ,Teacher newTeacher)
+        [HttpPut]
+        public ActionResult Put(Teacher newTeacher)
         {
-            if(service.Update(newTeacher ,s =>s.Id == id) == default(Teacher))
+            if(service.Update(newTeacher ,s =>s.Id == newTeacher.Id) == default)
                 return NotFound();
 
-            return CreatedAtAction(nameof(Put) , newTeacher);
+            return Ok( newTeacher.Id);
             
         }
+
+        
 
         [HttpDelete("{id}")]
 

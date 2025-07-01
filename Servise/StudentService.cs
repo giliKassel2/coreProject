@@ -10,7 +10,7 @@ namespace myProject.Services;
         
         }
 
-   public Student  Create(Student student)
+   public Student?  Create(Student student)
     {
         student.HashPassword = PasswordService.HashPassword(student.HashPassword);
         return base.Create(student);

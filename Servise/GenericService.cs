@@ -53,8 +53,21 @@ public class GenericService<T> : IGenericService<T>
         return _entities.FirstOrDefault(predicate);
     }
 
-    public T Create(T entity)
+    public T? Create(T entity)
     {
+        var entityId = entity?.GetType().GetProperty("Id")?.GetValue(entity);
+        if (entityId == null)
+        {           
+            Console.WriteLine("Entity does not have an ID property.");
+            return default; 
+        }
+        bool idExists = _entities.Any(e =>
+            e?.GetType().GetProperty("Id")?.GetValue(e)?.Equals(entityId) == true);
+        if (idExists)
+        {
+            return default; 
+        }
+     
         _entities.Add(entity);
         SaveToJson();
         return entity;
@@ -70,7 +83,8 @@ public class GenericService<T> : IGenericService<T>
             SaveToJson();
             return existingEntity;
         }
-        return default(T);
+        //not found
+        return default;
     }
 
     public bool Delete(Func<T, bool> predicate)
