@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace myProject.Controllers
 {
+    [Authorize(Policy = "principal")]
     [Route("api/[controller]")]
     public class TeachersController : ControllerBase
     {
@@ -14,13 +15,12 @@ namespace myProject.Controllers
         public TeachersController(TeacherService service){
             this.service = service;
         }
-       // [Authorize(Policy = "principal")]
         [HttpGet]
         public ActionResult<IEnumerable<Teacher>>? Get()
         {
             return service.Get();
         }
-
+        
         [HttpGet("{id}")]
         public ActionResult<Teacher> Get(int id){
             Teacher s = service.Get(s => s.Id == id);
@@ -38,12 +38,16 @@ namespace myProject.Controllers
                 return BadRequest("Teacher creation failed. Please ensure the teacher has a valid ID and password.");
             }
             if (newT == null)
-                return BadRequest();
+            {
+                System.Console.WriteLine("Teacher creation failed. Please ensure the teacher has a valid ID and password.__2");
+                 return BadRequest();
+            }
+               
 
             return CreatedAtAction(nameof(Post) , new {Id = newT.Id});
         }
 
-
+   
         [HttpPut]
         public ActionResult Put(Teacher newTeacher)
         {

@@ -1,6 +1,7 @@
 using System.Text.Json;
 using myProject.Controllers;
 using myProject.Interfaces;
+using myProject.Models;
 
 
 namespace myProject.Services;
@@ -10,28 +11,26 @@ public class GenericService<T> : IGenericService<T>
     private readonly string _filePath;
     private List<T> _entities;
 
-    public GenericService(string filePath)
+    public GenericService(List<Student> _entities)
     {
-        _filePath = filePath;
-
-        // Load entities from JSON file
-        if (File.Exists(_filePath))
-        {
-            System.Console.WriteLine("tbh ");
-            using (var json = File.OpenText(_filePath))
-            {
-                _entities = JsonSerializer.Deserialize<List<T>>(json.ReadToEnd(),
-                    new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    }) ?? new List<T>();
-            }
-            System.Console.WriteLine(_entities);
-        }
-        else
-        {
-            _entities = new List<T>();
-        }
+        _entities = _entities;
+        // // Load entities from JSON file
+        // if (File.Exists(_filePath))
+        // {
+        //     using (var json = File.OpenText(_filePath))
+        //     {
+        //         _entities = JsonSerializer.Deserialize<List<T>>(json.ReadToEnd(),
+        //             new JsonSerializerOptions
+        //             {
+        //                 PropertyNameCaseInsensitive = true
+        //             }) ?? new List<T>();
+        //     }
+        //     System.Console.WriteLine(_entities);
+        // }
+        // else
+        // {
+        //     _entities = new List<T>();
+        // }
     }
 
     public GenericService()
@@ -55,6 +54,7 @@ public class GenericService<T> : IGenericService<T>
 
     public T? Create(T entity)
     {
+        System.Console.WriteLine("Creating entity..." +entity);
         var entityId = entity?.GetType().GetProperty("Id")?.GetValue(entity);
         if (entityId == null)
         {           
@@ -67,7 +67,7 @@ public class GenericService<T> : IGenericService<T>
         {
             return default; 
         }
-     
+ 
         _entities.Add(entity);
         SaveToJson();
         return entity;

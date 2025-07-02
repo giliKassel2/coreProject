@@ -4,5 +4,11 @@
     "Id": 123,
     "Name": "shoshana",
     "presence": null
+  },
+  {
+    "HashPassword": "$2a$11$LU1MSPURLGpsVYX8I.7TUOmys6Yh182psNE7f30prUxm.U7PCbMWa",
+    "Id": 2,
+    "Name": "2",
+    "presence": null
   }
 ]

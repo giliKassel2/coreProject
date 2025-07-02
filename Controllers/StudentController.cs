@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using myProject.Models;
 using myProject.Services;
 using myProject.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace myProject.Controllers
 {
@@ -14,11 +15,15 @@ namespace myProject.Controllers
         {
             this.service = service;
         }
+        
+        [Authorize(Policy = "teacher")]
         [HttpGet]
         public ActionResult<IEnumerable<Student>> Get()
         {
             return service.Get();
         }
+        [Authorize(Policy = "student")]
+     //   [HttpGet("my")]
         [HttpGet("{id}")]
         public ActionResult<Student> Get(int id)
         {
@@ -29,6 +34,7 @@ namespace myProject.Controllers
             return s;
         }
 
+        [Authorize(Policy = "principal")]
         [HttpPost]
         public ActionResult Post(Student newStudent)
         {
@@ -43,7 +49,7 @@ namespace myProject.Controllers
             return CreatedAtAction(nameof(Post), new { Id = newS.Id });
         }
 
-
+        [Authorize(Policy  = "teacher")]
         [HttpPut]
         public ActionResult Put(Student newStudent)
         {
@@ -53,6 +59,7 @@ namespace myProject.Controllers
             return Ok(newStudent.Id);
         }
 
+        [Authorize(Policy = "principal")]
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

@@ -4,12 +4,14 @@ using myProject.Controllers;
 using myProject.Models;
 using myProject.Servise;
 namespace myProject.Services;
-public class LoginService{
-    
+
+public class LoginService
+{
+
     PasswordService passwordService = new PasswordService();
-    TeacherService teacherService ;
-    StudentService studentService ;
-        public LoginService(TeacherService teacherService, StudentService studentService)
+    TeacherService teacherService;
+    StudentService studentService;
+    public LoginService(TeacherService teacherService, StudentService studentService)
     {
         this.teacherService = teacherService;
         this.studentService = studentService;
@@ -33,7 +35,7 @@ public class LoginService{
             return false;
         }
         Student? RequestStudent = studentService.Get(s => s.Id == int.Parse(user.UserId));
-        if ((RequestTeacher != null && passwordService.VerifyPassword(user.Password, RequestTeacher.HashPassword))||user.UserId == "1000")
+        if ((RequestTeacher != null && passwordService.VerifyPassword(user.Password, RequestTeacher.HashPassword)) || user.UserId == "1000")
         {
             System.Console.WriteLine("Teacher found and password verified.");
             claims = new List<Claim>();
@@ -50,8 +52,12 @@ public class LoginService{
             {
                 claims.Add(
                      new Claim("type", "Teacher"));
+
+                string classesString = string.Join(",", RequestTeacher.Classes);
+                claims.Add(new Claim("classes", classesString));
+
             }
-            
+
         }
         else
         {
@@ -84,9 +90,10 @@ public class LoginService{
 
         return true;
     }
-    private bool saveToken(List<Claim> claims){
+    private bool saveToken(List<Claim> claims)
+    {
 
         return true;
     }
-    
-    }
+
+}

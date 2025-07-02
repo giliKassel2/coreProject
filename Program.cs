@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using myProject.Controllers;
 using System.IO;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -14,21 +15,22 @@ builder.Services.AddControllers();
 // Configure services
 void ConfigureServices(IServiceCollection services)
 {
+    services.AddHttpContextAccessor();
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(cfg =>
     {
         cfg.RequireHttpsMetadata = false;
-        cfg.TokenValidationParameters = 
+        cfg.TokenValidationParameters =
             CreateTokenService.GetTokenValidationParameters();
     });
 
     services.AddAuthorization(cfg =>
     {
-        cfg.AddPolicy("principal", 
+        cfg.AddPolicy("principal",
             policy => policy.RequireClaim("type", "principal"));
-        cfg.AddPolicy("teacher", 
+        cfg.AddPolicy("teacher",
             policy => policy.RequireClaim("type", "Teacher", "principal"));
-        cfg.AddPolicy("student", 
+        cfg.AddPolicy("student",
             policy => policy.RequireClaim("type", "Student", "Teacher", "principal"));
     });
 
@@ -46,10 +48,28 @@ void ConfigureServices(IServiceCollection services)
             Path.Combine(builder.Environment.ContentRootPath, "Data", "teachers.json")
         ));
 
-    
+
 
     services.AddEndpointsApiExplorer();
-    services.AddSwaggerGen();
+    builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tasks", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter JWT with Bearer into field",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                { new OpenApiSecurityScheme
+                        {
+                         Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer"}
+                        },
+                    new string[] {}
+                }
+   });
+});
 }
 
 // Call ConfigureServices before building the app

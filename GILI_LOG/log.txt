@@ -204,3 +204,12 @@
 /api/Student/124.DELETE took 13ms. status:200  Success: True
 /api/Student/124.GET took 2ms. status:404  Success: True
 /api/Teachers.PUT took 44ms. status:200  Success: True
+/api/Login.POST took 935ms. status:200  Success: True
+/api/Login.POST took 476ms. status:200  Success: True
+/api/Student.GET took 201ms. status:200  Success: True
+/api/Teachers.POST took 20ms. status:401  Success: True
+/api/Teachers.POST took 4ms. status:401  Success: True
+/api/Teachers.POST took 10ms. status:401  Success: True
+/api/Student.POST took 630ms. status:201  Success: True
+/api/Teachers.POST took 198ms. status:401  Success: True
+/api/Teachers.POST took 126ms. status:401  Success: True

@@ -5,8 +5,8 @@ namespace myProject.Models;
     public string HashPassword { get; set; }
     public int Id {get;set;}
     public string Name {get;set;}
-    
-    public List<Presence> presence {get;set;} 
+    public string Class { get; set; }
+    public List<Presence> presence { get; set; } 
     // = List<Presence>
 
   }
