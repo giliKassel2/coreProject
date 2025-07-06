@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using myProject.Controllers;
 using System.IO;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -49,7 +50,24 @@ void ConfigureServices(IServiceCollection services)
     
 
     services.AddEndpointsApiExplorer();
-    services.AddSwaggerGen();
+    services.AddSwaggerGen(c =>{
+   c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tasks", Version = "v1" });
+   c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+   {
+       In = ParameterLocation.Header,
+       Description = "Please enter JWT with Bearer into field",
+       Name = "Authorization",
+       Type = SecuritySchemeType.ApiKey
+   });
+   c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                { new OpenApiSecurityScheme
+                        {
+                         Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer"}
+                        },
+                    new string[] {}
+                }
+   });
+});
 }
 
 // Call ConfigureServices before building the app

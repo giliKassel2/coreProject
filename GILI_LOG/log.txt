@@ -186,3 +186,6 @@
 /styles.css.GET took 38ms. status:404  Success: True
 /api/Login.POST took 543ms. status:200  Success: True
 /api/Login.POST took 582ms. status:200  Success: True
+/api/Login.POST took 1058ms. status:200  Success: True
+/api/Login.POST took 824ms. status:200  Success: True
+/api/Teachers.GET took 115ms. status:401  Success: True
