@@ -17,59 +17,50 @@ public class LoginService{
     public bool Login(User user, HttpContext httpContext)
     {
         Teacher? RequestTeacher = null;
+        Student? RequestStudent = null;
         List<Claim> claims;
         try
         {
             RequestTeacher = teacherService.Get(t => t.Id == int.Parse(user.UserId));
-            System.Console.WriteLine("RequestTeacher: " + RequestTeacher?.Name);
-            if (RequestTeacher == null)
-            {
-                System.Console.WriteLine("Teacher not found with ID: " + user.UserId);
-            }
+            RequestStudent = studentService.Get(s => s.Id == int.Parse(user.UserId));
+            
+            
         }
         catch (Exception e)
         {
             Console.WriteLine("Error in LoginService: " + e.Message);
             return false;
         }
-        Student? RequestStudent = studentService.Get(s => s.Id == int.Parse(user.UserId));
-        if ((RequestTeacher != null && passwordService.VerifyPassword(user.Password, RequestTeacher.HashPassword))||user.UserId == "1000")
+       
+        if ((RequestTeacher != null && passwordService.VerifyPassword(user.Password, RequestTeacher.HashPassword)) || user.UserId == "1000")
         {
             System.Console.WriteLine("Teacher found and password verified.");
-            claims = new List<Claim>();
+            claims = new List<Claim>
             {
-                new Claim(ClaimTypes.PrimarySid, user.UserId);
-            }
-            ;
-            if (RequestTeacher.Name == "admin")
+                new Claim(ClaimTypes.PrimarySid, user.UserId)
+            };
+            if (RequestTeacher != null && RequestTeacher.Name == "admin")
             {
-                claims.Add(
-                    new Claim("type", "principal"));
+                claims.Add(new Claim("type", "principal"));
             }
             else
             {
-                claims.Add(
-                     new Claim("type", "Teacher"));
+                claims.Add(new Claim("type", "Teacher"));
             }
-            
+        }
+        else if (RequestStudent != null && passwordService.VerifyPassword(user.Password, RequestStudent.HashPassword))
+        {
+            System.Console.WriteLine("Student found and password verified.");
+            claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.PrimarySid, user.UserId),
+                new Claim("type", "Student")
+            };
         }
         else
         {
-            if (RequestStudent != null && passwordService.VerifyPassword(user.Password, RequestStudent.HashPassword))
-            {
-                System.Console.WriteLine("Student found and password verified.");
-                claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.PrimarySid,user.UserId ),
-                    new Claim("type","Student")
-                };
-            }
-            else
-            {
-                System.Console.WriteLine("not found id or passsword");
-                return false;
-            }
-
+            System.Console.WriteLine("not found id or passsword");
+            return false;
         }
         var token = CreateTokenService.GetToken(claims);
         var tokenString = CreateTokenService.WriteToken(token);
@@ -89,4 +80,4 @@ public class LoginService{
         return true;
     }
     
-    }
+} 

@@ -60,24 +60,35 @@ services.AddScoped<IGenericService<Teacher>>(provider =>
 });
 
     services.AddEndpointsApiExplorer();
-    services.AddSwaggerGen(c =>{
-   c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tasks", Version = "v1" });
-   c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-   {
-       In = ParameterLocation.Header,
-       Description = "Please enter JWT with Bearer into field",
-       Name = "Authorization",
-       Type = SecuritySchemeType.ApiKey
-   });
-   c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                { new OpenApiSecurityScheme
-                        {
-                         Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer"}
-                        },
-                    new string[] {}
-                }
-   });
-});
+    services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "Tasks", Version = "v1" });
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer eyJhbGciOiJIUzI1NiIs...\"",
+            Name = "Authorization",
+            In = ParameterLocation.Header,
+            Type = SecuritySchemeType.ApiKey,
+            Scheme = "Bearer"
+        });
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    },
+                    Scheme = "Bearer",
+                    Name = "Bearer",
+                    In = ParameterLocation.Header,
+                },
+                new string[] {}
+            }
+        });
+    });
 }
 
 // Call ConfigureServices before building the app
