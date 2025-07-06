@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using myProject.Interfaces;
 using myProject.Models;
 using myProject.Services;
-using myProject.Interfaces;
 
 namespace myProject.Controllers
 {
@@ -18,7 +20,9 @@ namespace myProject.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Student>> Get()
         {
-            return service.Get();
+            if (service.Get()!= null)
+                return service.Get();
+            return NotFound();
         }
 
         [Authorize(Policy = "teacher")]

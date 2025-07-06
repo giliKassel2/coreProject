@@ -5,9 +5,15 @@ using myProject.Controllers;
 namespace myProject.Services;
     public class StudentService:GenericService<Student>
     {
-        public StudentService(IHostEnvironment env) : base( "Data/StudentData.json")
+        // List<Student> students = new List<Student>();
+        // JsonManageService<Student> jsonFileService;
+        public StudentService(IHostEnvironment env) :base(
+             JsonManageService<Student>.LoadFromJson(
+                Path.Combine(env.ContentRootPath, "Data", "students.json")
+            ),Path.Combine(env.ContentRootPath, "Data", "students.json")
+        )
         {
-        
+           
         }
 
    public Student  Create(Student student)

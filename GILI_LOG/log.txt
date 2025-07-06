@@ -189,3 +189,6 @@
 /api/Login.POST took 1058ms. status:200  Success: True
 /api/Login.POST took 824ms. status:200  Success: True
 /api/Teachers.GET took 115ms. status:401  Success: True
+/login.js.GET took 66ms. status:404  Success: True
+/api/Login.POST took 136ms. status:500  Success: False
+/api/Login.POST took 247ms. status:500  Success: False

@@ -1,9 +1,9 @@
 using System.Text.Json;
 
-using namespace myProject.Services;
-public class JsonManageService
+ namespace myProject.Services;
+public class JsonManageService<T>
 {
-    public static List<T> LoadFromJson<T>(string filePath)
+    public static List<T> LoadFromJson(string filePath)
     {
         if (!File.Exists(filePath))
             return new List<T>();
@@ -15,7 +15,7 @@ public class JsonManageService
         }
     }
 
-    public static void SaveToJson<T>(string filePath, List<T> entities)
+    public static void SaveToJson(string filePath, List<T> entities)
     {
         try
         {
@@ -23,7 +23,7 @@ public class JsonManageService
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error saving to JSON: {ex.Message}");
+            Console.WriteLine($"Error saving to JSON: {ex.Message}");   
         }
     }
 }

@@ -38,16 +38,26 @@ void ConfigureServices(IServiceCollection services)
     services.AddScoped<LoginService>();
 
     services.AddScoped<IGenericService<Student>>(provider =>
-        new GenericService<Student>(
-            Path.Combine(builder.Environment.ContentRootPath, "Data", "students.json")
-        ));
+{
+    var env = provider.GetRequiredService<IHostEnvironment>();
+    return new GenericService<Student>(
+        JsonManageService<Student>.LoadFromJson(
+            Path.Combine(env.ContentRootPath, "Data", "students.json")
+        ),
+        Path.Combine(env.ContentRootPath, "Data", "students.json")
+    );
+});
 
-    services.AddScoped<IGenericService<Teacher>>(provider =>
-        new GenericService<Teacher>(
-            Path.Combine(builder.Environment.ContentRootPath, "Data", "teachers.json")
-        ));
-
-    
+services.AddScoped<IGenericService<Teacher>>(provider =>
+{
+    var env = provider.GetRequiredService<IHostEnvironment>();
+    return new GenericService<Teacher>(
+        JsonManageService<Teacher>.LoadFromJson(
+            Path.Combine(env.ContentRootPath, "Data", "teachers.json")
+        ),
+        Path.Combine(env.ContentRootPath, "Data", "teachers.json")
+    );
+});
 
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen(c =>{

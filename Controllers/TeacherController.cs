@@ -19,7 +19,9 @@ namespace myProject.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Teacher>>? Get()
         {
-            return service.Get();
+            if (service.Get() != null)
+                return service.Get();
+            return NotFound();
         }
 
         [Authorize(Policy = "teacher")]

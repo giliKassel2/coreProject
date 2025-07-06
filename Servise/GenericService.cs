@@ -7,12 +7,13 @@ namespace myProject.Services;
 
 public class GenericService<T> : IGenericService<T>
 {
-    private readonly string _filePath;
+    private readonly string filePath;
     private List<T> _entities;
 
-    public GenericService(List<T> entities)
+    public GenericService(List<T> entities,string filePath)
     {
         this._entities = entities ?? new List<T>();
+        this.filePath = filePath;
         // _filePath = filePath;
 
         // // Load entities from JSON file
@@ -35,9 +36,6 @@ public class GenericService<T> : IGenericService<T>
         // }
     }
 
-    public GenericService()
-    {
-    }
 
     public List<T> Get()
     {
@@ -57,7 +55,7 @@ public class GenericService<T> : IGenericService<T>
     public T Create(T entity)
     {
         _entities.Add(entity);
-        SaveToJson();
+        JsonManageService<T>.SaveToJson(filePath , _entities);
         return entity;
     }
 
@@ -68,7 +66,7 @@ public class GenericService<T> : IGenericService<T>
         {
             var index = _entities.IndexOf(existingEntity);
             _entities[index] = entity;
-            SaveToJson();
+            JsonManageService<T>.SaveToJson(filePath , _entities);
             return existingEntity;
         }
         return default(T);
@@ -80,23 +78,23 @@ public class GenericService<T> : IGenericService<T>
         if (entityToRemove != null)
         {
             _entities.Remove(entityToRemove);
-            SaveToJson();
+            JsonManageService<T>.SaveToJson(filePath , _entities);
             return true;
         }
         return false;
     }
 
-    private void SaveToJson()
-    {
-        try
-        {
-            File.WriteAllText(_filePath, JsonSerializer.Serialize(_entities, new JsonSerializerOptions { WriteIndented = true }));
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error saving to JSON: {ex.Message}");
-        }
-    }
+    // private void SaveToJson()
+    // {
+    //     try
+    //     {
+    //         File.WriteAllText(_filePath, JsonSerializer.Serialize(_entities, new JsonSerializerOptions { WriteIndented = true }));
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         Console.WriteLine($"Error saving to JSON: {ex.Message}");
+    //     }
+    // }
 
 
 
