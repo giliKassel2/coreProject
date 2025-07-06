@@ -1,7 +1,6 @@
 using System.Text.Json;
 using myProject.Controllers;
 using myProject.Interfaces;
-using myProject.Models;
 
 
 namespace myProject.Services;
@@ -11,26 +10,28 @@ public class GenericService<T> : IGenericService<T>
     private readonly string _filePath;
     private List<T> _entities;
 
-    public GenericService(List<Student> _entities)
+    public GenericService(string filePath)
     {
-        _entities = _entities;
-        // // Load entities from JSON file
-        // if (File.Exists(_filePath))
-        // {
-        //     using (var json = File.OpenText(_filePath))
-        //     {
-        //         _entities = JsonSerializer.Deserialize<List<T>>(json.ReadToEnd(),
-        //             new JsonSerializerOptions
-        //             {
-        //                 PropertyNameCaseInsensitive = true
-        //             }) ?? new List<T>();
-        //     }
-        //     System.Console.WriteLine(_entities);
-        // }
-        // else
-        // {
-        //     _entities = new List<T>();
-        // }
+        _filePath = filePath;
+
+        // Load entities from JSON file
+        if (File.Exists(_filePath))
+        {
+            System.Console.WriteLine("tbh ");
+            using (var json = File.OpenText(_filePath))
+            {
+                _entities = JsonSerializer.Deserialize<List<T>>(json.ReadToEnd(),
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }) ?? new List<T>();
+            }
+            System.Console.WriteLine(_entities);
+        }
+        else
+        {
+            _entities = new List<T>();
+        }
     }
 
     public GenericService()
@@ -52,22 +53,8 @@ public class GenericService<T> : IGenericService<T>
         return _entities.FirstOrDefault(predicate);
     }
 
-    public T? Create(T entity)
+    public T Create(T entity)
     {
-        System.Console.WriteLine("Creating entity..." +entity);
-        var entityId = entity?.GetType().GetProperty("Id")?.GetValue(entity);
-        if (entityId == null)
-        {           
-            Console.WriteLine("Entity does not have an ID property.");
-            return default; 
-        }
-        bool idExists = _entities.Any(e =>
-            e?.GetType().GetProperty("Id")?.GetValue(e)?.Equals(entityId) == true);
-        if (idExists)
-        {
-            return default; 
-        }
- 
         _entities.Add(entity);
         SaveToJson();
         return entity;
@@ -83,8 +70,7 @@ public class GenericService<T> : IGenericService<T>
             SaveToJson();
             return existingEntity;
         }
-        //not found
-        return default;
+        return default(T);
     }
 
     public bool Delete(Func<T, bool> predicate)

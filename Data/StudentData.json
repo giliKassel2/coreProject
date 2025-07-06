@@ -1,14 +1,18 @@
+
 [
-  {
-    "HashPassword": "$2a$11$V6c4rQkuWvzACP0wtSawWOu3sCGVcy7c5l6l9aO6ABcpEbFs6H4BK",
-    "Id": 123,
-    "Name": "shoshana",
-    "presence": null
+  { "HashPassword": "123", "Id": 100, "Name": "gili kassel", "presence": [
+      { "Id": 1, "Date": "2023-10-01", "Status": "Present" },
+      { "Id": 2, "Date": "2023-10-02", "Status": "Absent" }
+    ]
   },
-  {
-    "HashPassword": "$2a$11$LU1MSPURLGpsVYX8I.7TUOmys6Yh182psNE7f30prUxm.U7PCbMWa",
-    "Id": 2,
-    "Name": "2",
-    "presence": null
+  { "HashPassword": "456", "Id": 101, "Name": "dani levi", "presence": [
+      { "Id": 3, "Date": "2023-10-01", "Status": "Present" },
+      { "Id": 4, "Date": "2023-10-02", "Status": "Present" }
+    ]
+  },
+  { "HashPassword": "789", "Id": 102, "Name": "roni levi", "presence": [
+      { "Id": 5, "Date": "2023-10-01", "Status": "Absent" },
+      { "Id": 6, "Date": "2023-10-02", "Status": "Present" }
+    ]
   }
 ]

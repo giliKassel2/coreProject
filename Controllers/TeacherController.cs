@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace myProject.Controllers
 {
-    [Authorize(Policy = "principal")]
     [Route("api/[controller]")]
     public class TeachersController : ControllerBase
     {
@@ -15,12 +14,13 @@ namespace myProject.Controllers
         public TeachersController(TeacherService service){
             this.service = service;
         }
+        [Authorize(Policy = "principal")]
         [HttpGet]
         public ActionResult<IEnumerable<Teacher>>? Get()
         {
             return service.Get();
         }
-        
+
         [HttpGet("{id}")]
         public ActionResult<Teacher> Get(int id){
             Teacher s = service.Get(s => s.Id == id);
@@ -33,32 +33,22 @@ namespace myProject.Controllers
         public ActionResult Post(Teacher newTeacher)
         {
             Teacher newT= service.Create(newTeacher);
-             if (newT == default)
-            {
-                return BadRequest("Teacher creation failed. Please ensure the teacher has a valid ID and password.");
-            }
             if (newT == null)
-            {
-                System.Console.WriteLine("Teacher creation failed. Please ensure the teacher has a valid ID and password.__2");
-                 return BadRequest();
-            }
-               
+                return BadRequest();
 
             return CreatedAtAction(nameof(Post) , new {Id = newT.Id});
         }
 
-   
-        [HttpPut]
-        public ActionResult Put(Teacher newTeacher)
+
+        [HttpPut("{id}")]
+        public ActionResult Put(int id ,Teacher newTeacher)
         {
-            if(service.Update(newTeacher ,s =>s.Id == newTeacher.Id) == default)
+            if(service.Update(newTeacher ,s =>s.Id == id) == default(Teacher))
                 return NotFound();
 
-            return Ok( newTeacher.Id);
+            return CreatedAtAction(nameof(Put) , newTeacher);
             
         }
-
-        
 
         [HttpDelete("{id}")]
 
