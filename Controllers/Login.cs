@@ -23,7 +23,6 @@ public class LoginController : ControllerBase
         System.Console.WriteLine("start login post----");
         if (loginService.Login(user, HttpContext))
         {
-            System.Console.WriteLine("return true");
             //  return Redirect("\\index.html");
             var token = HttpContext.Response.Headers["Set-Cookie"];
             return Ok(new { success = true, cookie = token });

@@ -13,11 +13,15 @@ namespace myProject.Controllers
         public StudentController(StudentService service){
             this.service = service;
         }
+
+        [Authorize(Policy = "teacher")]
         [HttpGet]
         public ActionResult<IEnumerable<Student>> Get()
         {
             return service.Get();
         }
+
+        [Authorize(Policy = "teacher")]
         [HttpGet("{id}")]
         public ActionResult<Student> Get(int id){
             Student s = service.Get(s => s.Id == id);
@@ -27,6 +31,7 @@ namespace myProject.Controllers
             return s;
         }
 
+        [Authorize(Policy = "principal")]
         [HttpPost]
         public ActionResult Post(Student newStudent)
         {
@@ -37,7 +42,7 @@ namespace myProject.Controllers
             return CreatedAtAction(nameof(Post) , new {Id = newS.Id});
         }
 
-
+        [Authorize(Policy = "teacher")]
         [HttpPut("{id}")]
         public ActionResult Put(int id ,Student newStudent)
         {
@@ -48,6 +53,7 @@ namespace myProject.Controllers
             
         }
 
+        [Authorize(Policy = "principal")]
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

@@ -10,28 +10,29 @@ public class GenericService<T> : IGenericService<T>
     private readonly string _filePath;
     private List<T> _entities;
 
-    public GenericService(string filePath)
+    public GenericService(List<T> entities)
     {
-        _filePath = filePath;
+        this._entities = entities ?? new List<T>();
+        // _filePath = filePath;
 
-        // Load entities from JSON file
-        if (File.Exists(_filePath))
-        {
-            System.Console.WriteLine("tbh ");
-            using (var json = File.OpenText(_filePath))
-            {
-                _entities = JsonSerializer.Deserialize<List<T>>(json.ReadToEnd(),
-                    new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    }) ?? new List<T>();
-            }
-            System.Console.WriteLine(_entities);
-        }
-        else
-        {
-            _entities = new List<T>();
-        }
+        // // Load entities from JSON file
+        // if (File.Exists(_filePath))
+        // {
+        //     System.Console.WriteLine("tbh ");
+        //     using (var json = File.OpenText(_filePath))
+        //     {
+        //         _entities = JsonSerializer.Deserialize<List<T>>(json.ReadToEnd(),
+        //             new JsonSerializerOptions
+        //             {
+        //                 PropertyNameCaseInsensitive = true
+        //             }) ?? new List<T>();
+        //     }
+        //     System.Console.WriteLine(_entities);
+        // }
+        // else
+        // {
+        //     _entities = new List<T>();
+        // }
     }
 
     public GenericService()
