@@ -14,26 +14,7 @@ public class GenericService<T> : IGenericService<T>
     {
         this._entities = entities ?? new List<T>();
         this.filePath = filePath;
-        // _filePath = filePath;
-
-        // // Load entities from JSON file
-        // if (File.Exists(_filePath))
-        // {
-        //     System.Console.WriteLine("tbh ");
-        //     using (var json = File.OpenText(_filePath))
-        //     {
-        //         _entities = JsonSerializer.Deserialize<List<T>>(json.ReadToEnd(),
-        //             new JsonSerializerOptions
-        //             {
-        //                 PropertyNameCaseInsensitive = true
-        //             }) ?? new List<T>();
-        //     }
-        //     System.Console.WriteLine(_entities);
-        // }
-        // else
-        // {
-        //     _entities = new List<T>();
-        // }
+      
     }
 
 
@@ -44,11 +25,6 @@ public class GenericService<T> : IGenericService<T>
 
     public T? Get(Func<T, bool> predicate)
     {
-        //  Console.WriteLine("************************");
-        // foreach (var entity in _entities)
-        // {
-        //     Console.WriteLine(JsonSerializer.Serialize(entity));
-        // }
         return _entities.FirstOrDefault(predicate);
     }
 
@@ -69,6 +45,7 @@ public class GenericService<T> : IGenericService<T>
             JsonManageService<T>.SaveToJson(filePath , _entities);
             return existingEntity;
         }
+
         return default(T);
     }
 

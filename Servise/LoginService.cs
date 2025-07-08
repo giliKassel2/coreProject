@@ -8,13 +8,25 @@ namespace myProject.Services;
 public class LoginService
 {
     private readonly PasswordService passwordService = new PasswordService();
-    private readonly TeacherService teacherService;
+    private readonly TeacherService teacherService ;
     private readonly StudentService studentService;
 
-    public LoginService(TeacherService teacherService, StudentService studentService)
+    public LoginService()
     {
-        this.teacherService = teacherService;
-        this.studentService = studentService;
+
+        var basePath = Path.Combine(Directory.GetCurrentDirectory(), "Data");
+
+        teacherService = new TeacherService(
+            JsonManageService<Teacher>.LoadFromJson(Path.Combine(basePath, "TeacherData.json")),
+            Path.Combine(basePath, "TeacherData.json")
+        );
+
+        studentService = new StudentService(
+            JsonManageService<Student>.LoadFromJson(Path.Combine(basePath, "StudentData.json")),
+            Path.Combine(basePath, "StudentData.json")
+        );
+        System.Console.WriteLine("LoginService initialized");
+
     }
 
     public bool Login(User user, HttpContext httpContext)
@@ -23,15 +35,10 @@ public class LoginService
         Student? RequestStudent = null;
         List<Claim> claims;
 
-        try
-        {
+       System.Console.WriteLine($"userId: {user.UserId}, password: {user.Password}");
             RequestTeacher = teacherService.Get(t => t.Id == int.Parse(user.UserId));
             RequestStudent = studentService.Get(s => s.Id == int.Parse(user.UserId));
-        }
-        catch (Exception e)
-        {
-            throw new Exception("Error retrieving user data.");
-        }
+        
 
         if ((RequestTeacher != null && passwordService.VerifyPassword(user.Password, RequestTeacher.HashPassword)) || user.UserId == "1000")
         {
@@ -44,6 +51,7 @@ public class LoginService
             if (RequestTeacher != null && RequestTeacher.Name == "admin")
             {
                 claims.Add(new Claim("type", "principal"));
+                System.Console.WriteLine("!!Admin logged in!!");
             }
             else
             {

@@ -8,15 +8,20 @@ public class StudentService : GenericService<Student>
     public StudentService(IHostEnvironment env, IHttpContextAccessor accessor)
         : base(
             GetFilteredStudents(env, new UserContextService(accessor)),
-            Path.Combine(env.ContentRootPath, "Data", "students.json")
+            Path.Combine(env.ContentRootPath, "Data", "StudentData.json")
         )
     {
     }
 
+    public StudentService(List<Student> students, string filePath)
+        : base(students, filePath)
+    {
+    }
+        
     private static List<Student> GetFilteredStudents(IHostEnvironment env, UserContextService userContext)
     {
         var allStudents = JsonManageService<Student>.LoadFromJson(
-            Path.Combine(env.ContentRootPath, "Data", "students.json"));
+            Path.Combine(env.ContentRootPath, "Data", "StudentData.json"));
 
         switch (userContext.Type)
         {

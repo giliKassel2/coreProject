@@ -12,11 +12,11 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
+ builder.Services.AddSingleton<IHostEnvironment>(builder.Environment);
 // Configure services
 void ConfigureServices(IServiceCollection services)
 {
-    
-
+   
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(cfg =>
     {
@@ -45,9 +45,9 @@ void ConfigureServices(IServiceCollection services)
     var env = provider.GetRequiredService<IHostEnvironment>();
     return new GenericService<Student>(
         JsonManageService<Student>.LoadFromJson(
-            Path.Combine(env.ContentRootPath, "Data", "students.json")
+            Path.Combine(env.ContentRootPath, "Data", "StudentData.json")
         ),
-        Path.Combine(env.ContentRootPath, "Data", "students.json")
+        Path.Combine(env.ContentRootPath, "Data", "StudentData.json")
     );
 });
 
@@ -56,9 +56,9 @@ services.AddScoped<IGenericService<Teacher>>(provider =>
     var env = provider.GetRequiredService<IHostEnvironment>();
     return new GenericService<Teacher>(
         JsonManageService<Teacher>.LoadFromJson(
-            Path.Combine(env.ContentRootPath, "Data", "teachers.json")
+            Path.Combine(env.ContentRootPath, "Data", "TeacherData.json")
         ),
-        Path.Combine(env.ContentRootPath, "Data", "teachers.json")
+        Path.Combine(env.ContentRootPath, "Data", "TeacherData.json")
     );
 });
 

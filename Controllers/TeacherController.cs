@@ -48,7 +48,10 @@ namespace myProject.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id ,Teacher newTeacher)
         {
-            if(service.Update(newTeacher ,s =>s.Id == id) == default(Teacher))
+            System.Console.WriteLine("id = " + id);
+          
+            if (service.Update(newTeacher, s => s.Id == id) == default(Teacher))
+
                 return NotFound();
 
             return CreatedAtAction(nameof(Put) , newTeacher);
