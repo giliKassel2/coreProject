@@ -6,6 +6,6 @@ namespace myProject.Models
         public string HashPassword{ get; set; }
         public string Name { get; set; }
         public string Subject { get; set; }
-        public List<string> Classes { get; set; } = new List<string>();
+        public List<string> Clases { get; set; } = new List<string>();
     }
     
