@@ -49,5 +49,15 @@
     "Clases": [
       "2"
     ]
+  },
+  {
+    "Id": 5,
+    "HashPassword": "$2a$11$L3bpiArqCp7gx6Ro8/b2c.BNFvxTrM/0yPPWqLxdyLQXsASmDnuwm",
+    "Name": "chaya s",
+    "Subject": "english",
+    "Clases": [
+      "A",
+      "B"
+    ]
   }
 ]

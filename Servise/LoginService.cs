@@ -56,6 +56,8 @@ public class LoginService
             else
             {
                 claims.Add(new Claim("type", "Teacher"));
+                claims.Add(new Claim("clases", string.Join(",", RequestTeacher.Clases.Select(c => c.ToString())))); // אם יש ClassId
+                System.Console.WriteLine($"Teacher logged in with classes: {string.Join(", ", RequestTeacher.Clases)}");
             }
 
             // כאן אפשר להוסיף Claim של רשימת כיתות אם צריך

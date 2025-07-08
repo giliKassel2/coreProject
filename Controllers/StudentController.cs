@@ -25,7 +25,7 @@ namespace myProject.Controllers
             return NotFound();
         }
 
-        [Authorize(Policy = "teacher")]
+        [Authorize(Policy = "student")]
         [HttpGet("{id}")]
         public ActionResult<Student> Get(int id){
             Student s = service.Get(s => s.Id == id);

@@ -1,18 +1,70 @@
-
 [
-  { "HashPassword": "123", "Id": 100, "Name": "gili kassel", "presence": [
-      { "Id": 1, "Date": "2023-10-01", "Status": "Present" },
-      { "Id": 2, "Date": "2023-10-02", "Status": "Absent" }
+  {
+    "HashPassword": "123",
+    "Id": 100,
+    "Name": "gili kassel",
+    "Clas": null,
+    "presence": [
+      {
+        "Date": "2023-10-01T00:00:00",
+        "Lesson": null,
+        "IsPresent": false
+      },
+      {
+        "Date": "2023-10-02T00:00:00",
+        "Lesson": null,
+        "IsPresent": false
+      }
     ]
   },
-  { "HashPassword": "456", "Id": 101, "Name": "dani levi", "presence": [
-      { "Id": 3, "Date": "2023-10-01", "Status": "Present" },
-      { "Id": 4, "Date": "2023-10-02", "Status": "Present" }
+  {
+    "HashPassword": "456",
+    "Id": 101,
+    "Name": "dani levi",
+    "Clas": null,
+    "presence": [
+      {
+        "Date": "2023-10-01T00:00:00",
+        "Lesson": null,
+        "IsPresent": false
+      },
+      {
+        "Date": "2023-10-02T00:00:00",
+        "Lesson": null,
+        "IsPresent": false
+      }
     ]
   },
-  { "HashPassword": "789", "Id": 102, "Name": "roni levi", "presence": [
-      { "Id": 5, "Date": "2023-10-01", "Status": "Absent" },
-      { "Id": 6, "Date": "2023-10-02", "Status": "Present" }
+  {
+    "HashPassword": "789",
+    "Id": 102,
+    "Name": "roni levi",
+    "Clas": null,
+    "presence": [
+      {
+        "Date": "2023-10-01T00:00:00",
+        "Lesson": null,
+        "IsPresent": false
+      },
+      {
+        "Date": "2023-10-02T00:00:00",
+        "Lesson": null,
+        "IsPresent": false
+      }
     ]
+  },
+  {
+    "HashPassword": "$2a$11$KwDW6ahHQqzUaD1ZroNobOwnwlB9NEn55CpXq0rbfCYTECOHesX/m",
+    "Id": 777,
+    "Name": "sheva ",
+    "Clas": "A",
+    "presence": null
+  },
+  {
+    "HashPassword": "$2a$11$O0RxSRJKvnKvJlQIUd8oye/kObefRG2bpOBwinLwc4r9O7SbNpnRe",
+    "Id": 888,
+    "Name": "sheva ",
+    "Clas": "C",
+    "presence": null
   }
 ]
