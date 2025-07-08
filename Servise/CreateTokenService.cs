@@ -38,15 +38,6 @@ namespace myProject.Services;
         new JwtSecurityTokenHandler().WriteToken(token);
 
     }
-    // List<Claim> claims = new List<Claim>
-    // {
-    //     new Claim(ClaimTypes.Name, "username"),
-    //     new Claim(ClaimTypes.Role, "admin")
-    // };
-
-    // SecurityToken token = LoginService.GetToken(claims);
-    // string tokenString = LoginService.WriteToken(token);
-    // Console.WriteLine(tokenString);
 
 
 

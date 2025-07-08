@@ -11,10 +11,12 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
-
+builder.Services.AddHttpContextAccessor();
 // Configure services
 void ConfigureServices(IServiceCollection services)
 {
+    
+
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(cfg =>
     {
@@ -36,6 +38,7 @@ void ConfigureServices(IServiceCollection services)
     services.AddScoped<StudentService>();
     services.AddScoped<TeacherService>();
     services.AddScoped<LoginService>();
+    services.AddScoped<UserContextService>();
 
     services.AddScoped<IGenericService<Student>>(provider =>
 {

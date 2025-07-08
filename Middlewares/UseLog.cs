@@ -27,6 +27,7 @@ public class UseLog
                 writer.WriteLine("log file created");
             }
         }
+        try{
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
             string status = context.Response.StatusCode.ToString();
@@ -35,6 +36,11 @@ public class UseLog
             writer.WriteLine($"{context.Request.Path}.{context.Request.Method} took {stoper.ElapsedMilliseconds}ms. "
             +$"status:{status}  Success: {context.Items["success"]}");
          
+        }
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error writing to log file: {ex.Message}");
         }
     }
 }
