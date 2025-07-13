@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מורים</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <title>פרטי מורה ונוכחות</title>
+    <link rel="stylesheet" href="css/teacher.css" />
 </head>
 <body>
     <header>
-        <h1>רשימת מורים</h1>
+        <h1>פרטי מורה</h1>
+        <div id="teacherInfo">
+            <p>שם: <span id="teacherName"></span></p>
+            <p>מקצוע: <span id="teacherSubject"></span></p>
+        </div>
     </header>
-    <main>
-        <ul id="teacherList"></ul>
-    </main>
-    <footer>
-        <p>© 2023 כל הזכויות שמורות</p>
-    </footer>
-    <script src="teachers.js"></script>
+
+    <section id="classesSection">
+        <h2>כיתות</h2>
+        <div id="classesButtons"></div>
+    </section>
+
+    <section id="studentsSection" style="display:none;">
+        <h2>תלמידים בכיתה: <span id="selectedClass"></span></h2>
+        <table id="studentsTable">
+            <thead>
+                <tr>
+                    <th>שם תלמיד</th>
+                    <th>נוכחות אחרונה</th>
+                    <th>סמן נוכחות</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- יתווספו שורות תלמידים -->
+            </tbody>
+        </table>
+    </section>
+
+    <button id="logoutBtn">יציאה</button>
+
+    <script src="js/teacher.js"></script>
 </body>
 </html>

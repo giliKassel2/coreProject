@@ -272,3 +272,13 @@
 /api/Login.POST took 645ms. status:200  Success: True
 /api/Student/777.GET took 112ms. status:200  Success: True
 /api/Student/777.GET took 13ms. status:200  Success: True
+/styles.css.GET took 8ms. status:307  Success: True
+/styles.css.GET took 48ms. status:404  Success: True
+/favicon.ico.GET took 0ms. status:307  Success: True
+/favicon.ico.GET took 3ms. status:404  Success: True
+/styles.css.GET took 108ms. status:404  Success: True
+/login.js.GET took 51ms. status:404  Success: True
+/api/login.POST took 146ms. status:500  Success: False
+/api/login.POST took 20ms. status:500  Success: False
+/api/login.POST took 43ms. status:500  Success: False
+/api/login.POST took 9ms. status:500  Success: False

@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    direction: rtl;
+    background: #f9f9f9;
+    color: #333;
+}
+
+header, section {
+    margin-bottom: 30px;
+}
+
+#teacherInfo p {
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
+#classesButtons {
+    margin-top: 10px;
+}
+
+#classesButtons button {
+    margin: 5px 8px 5px 0;
+    padding: 8px 15px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#classesButtons button:hover, #classesButtons button.active {
+    background-color: #2980b9;
+}
+
+#studentsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#studentsTable th, #studentsTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+#studentsTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#studentsTable tr:hover {
+    background-color: #ddd;
+}
+
+#studentsTable button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #27ae60;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#studentsTable button.absent {
+    background-color: #c0392b;
+}
+
+#logoutBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#logoutBtn:hover {
+    background-color: #c0392b;
+}

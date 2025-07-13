@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לוגין</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/login.css" />
 </head>
 <body>
-    <header>
-        <h1>התחבר למערכת</h1>
-    </header>
-    <main>
+    <div class="login-container">
+        <h2>התחבר למערכת</h2>
         <form id="loginForm">
-            <label for="username">שם משתמש:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">סיסמה:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="userId">שם משתמש</label>
+            <input type="text" id="userId" name="userId" required />
+
+            <label for="password">סיסמה</label>
+            <input type="password" id="password" name="password" required />
+
             <button type="submit">התחבר</button>
         </form>
-    </main>
-    <footer>
-        <p>© 2023 כל הזכויות שמורות</p>
-    </footer>
-    <script src="login.js"></script>
+        <div id="error" class="error-message"></div>
+    </div>
+
+    <script src="/js/login.js"></script>
 </body>
 </html>

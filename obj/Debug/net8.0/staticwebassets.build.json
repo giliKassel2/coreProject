@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "IOcdfqllROtoAJgiOpyxym86CaGqzjIfF2MZ0ute3zw=",
+  "Hash": "BvRiX2k9msxvsBtAPLBXb6D9on2O0bdEYVauMyOH1TY=",
   "Source": "myProject",
   "BasePath": "_content/myProject",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\user1\\Desktop\\core\\הפרויקט\\myProject\\wwwroot\\css\\site.css",
+      "Identity": "C:\\Users\\user1\\Desktop\\core\\הפרויקט\\myProject\\wwwroot\\css\\login.css",
       "SourceId": "myProject",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\user1\\Desktop\\core\\הפרויקט\\myProject\\wwwroot\\",
       "BasePath": "_content/myProject",
-      "RelativePath": "css/site.css",
+      "RelativePath": "css/login.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -33,7 +33,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\site.css"
+      "OriginalItemSpec": "wwwroot\\css\\login.css"
     },
     {
       "Identity": "C:\\Users\\user1\\Desktop\\core\\הפרויקט\\myProject\\wwwroot\\index.html",
@@ -150,6 +150,25 @@
       "OriginalItemSpec": "wwwroot\\login.html"
     },
     {
+      "Identity": "C:\\Users\\user1\\Desktop\\core\\הפרויקט\\myProject\\wwwroot\\principal.html",
+      "SourceId": "myProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user1\\Desktop\\core\\הפרויקט\\myProject\\wwwroot\\",
+      "BasePath": "_content/myProject",
+      "RelativePath": "principal.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\principal.html"
+    },
+    {
       "Identity": "C:\\Users\\user1\\Desktop\\core\\הפרויקט\\myProject\\wwwroot\\students.html",
       "SourceId": "myProject",
       "SourceType": "Discovered",
@@ -186,6 +205,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\teacher.html"
+    },
+    {
+      "Identity": "C:\\Users\\user1\\Desktop\\core\\הפרויקט\\myProject\\wwwroot\\UI",
+      "SourceId": "myProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user1\\Desktop\\core\\הפרויקט\\myProject\\wwwroot\\",
+      "BasePath": "_content/myProject",
+      "RelativePath": "UI",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\UI"
     }
   ]
 }

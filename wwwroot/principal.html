@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8" />
+    <title>מערכת ניהול - מנהל</title>
+    <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+    <header>
+        <h1>מערכת ניהול בית ספר</h1>
+        <button id="logoutBtn">יציאה</button>
+    </header>
+
+    <nav>
+        <button id="btnStudents">תלמידים</button>
+        <button id="btnTeachers">מורים</button>
+    </nav>
+
+    <main>
+        <section id="studentsSection" style="display:none;">
+            <h2>רשימת תלמידים</h2>
+            <table id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>שם</th>
+                        <th>כיתה</th>
+                        <th>פרטים</th>
+                        <th>עריכה</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- שורות תלמידים -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="teachersSection" style="display:none;">
+            <h2>רשימת מורים</h2>
+            <table id="teachersTable">
+                <thead>
+                    <tr>
+                        <th>שם</th>
+                        <th>מקצוע</th>
+                        <th>כיתות</th>
+                        <th>פרטים</th>
+                        <th>עריכה</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- שורות מורים -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- אפשר להוסיף טפסים או אזורים לפרטי פרופיל ועריכה -->
+        <section id="detailsSection" style="display:none;">
+            <h2>פרטי פרופיל</h2>
+            <div id="detailsContent">
+                <!-- יטען דינמית -->
+            </div>
+            <button id="closeDetailsBtn">סגור</button>
+        </section>
+    </main>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
