@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const response = await fetch("/api/teachers/me", { credentials: "include" });
             if (!response.ok) {
                 alert("שגיאה בקבלת פרטי המורה");
-                window.location.href = "/login.html";
+                //window.location.href = "/login.html";
                 return null;
             }
             return await response.json();
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             alert("שגיאה בשרת");
             console.error(err);
             return null;
-        }
+        } 
     }
 
     // פונקציה לקבלת תלמידים לפי כיתה

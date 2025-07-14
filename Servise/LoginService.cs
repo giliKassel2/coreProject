@@ -29,54 +29,58 @@ public class LoginService
 
     }
 
-    public bool Login(User user, HttpContext httpContext)
+    public int Login(User user, HttpContext httpContext)
     {
         Teacher? RequestTeacher = null;
         Student? RequestStudent = null;
         List<Claim> claims;
-
-       System.Console.WriteLine($"userId: {user.UserId}, password: {user.Password}");
-            RequestTeacher = teacherService.Get(t => t.Id == int.Parse(user.UserId));
-            RequestStudent = studentService.Get(s => s.Id == int.Parse(user.UserId));
+        int type = -1;
+      
+            RequestTeacher = teacherService.Get(t => t.Id == int.Parse(user.UserId))?? null;
+            RequestStudent = studentService.Get(s => s.Id == int.Parse(user.UserId))?? null;
+            System.Console.WriteLine($"userId: {user.UserId}, password: {user.Password}");
         
-
         if ((RequestTeacher != null && passwordService.VerifyPassword(user.Password, RequestTeacher.HashPassword)) || user.UserId == "1000")
-        {
-            Console.WriteLine("Teacher found and password verified.");
-            claims = new List<Claim>
+            {
+                Console.WriteLine("Teacher found and password verified.");
+                claims = new List<Claim>
             {
                 new Claim(ClaimTypes.PrimarySid, user.UserId)
             };
 
-            if (RequestTeacher != null && RequestTeacher.Name == "admin")
-            {
-                claims.Add(new Claim("type", "principal"));
-                System.Console.WriteLine("!!Admin logged in!!");
-            }
-            else
-            {
-                claims.Add(new Claim("type", "Teacher"));
-                claims.Add(new Claim("clases", string.Join(",", RequestTeacher.Clases.Select(c => c.ToString())))); // אם יש ClassId
-                System.Console.WriteLine($"Teacher logged in with classes: {string.Join(", ", RequestTeacher.Clases)}");
-            }
+                if (RequestTeacher != null && RequestTeacher.Name == "admin")
+                {
+                    claims.Add(new Claim("type", "principal"));
+                    System.Console.WriteLine("!!Admin logged in!!");
+                    type = 0;
+                }
+                else
+                {
+                    claims.Add(new Claim("type", "Teacher"));
+                    claims.Add(new Claim("clases", string.Join(",", RequestTeacher.Clases.Select(c => c.ToString())))); // אם יש ClassId
+                    System.Console.WriteLine($"Teacher logged in with classes: {string.Join(", ", RequestTeacher.Clases)}");
+                    type = 1;
+                }
 
-            // כאן אפשר להוסיף Claim של רשימת כיתות אם צריך
-        }
-        else if (RequestStudent != null && passwordService.VerifyPassword(user.Password, RequestStudent.HashPassword))
-        {
-            Console.WriteLine("Student found and password verified.");
-            claims = new List<Claim>
+                // כאן אפשר להוסיף Claim של רשימת כיתות אם צריך
+            }
+            else if (RequestStudent != null && passwordService.VerifyPassword(user.Password, RequestStudent.HashPassword))
+            {
+                Console.WriteLine("Student found and password verified.");
+                claims = new List<Claim>
             {
                 new Claim(ClaimTypes.PrimarySid, user.UserId),
                 new Claim("type", "Student"),
                 new Claim("clas", RequestStudent.Clas.ToString()) // אם יש ClassId
+                
             };
-        }
-        else
-        {
-            Console.WriteLine("not found id or password");
-            return false;
-        }
+                type = 2;
+            }
+            else
+            {
+                Console.WriteLine("not found id or password");
+                return -1;
+            }
 
         try
         {
@@ -89,8 +93,8 @@ public class LoginService
                 Secure = true, 
                 Expires = DateTimeOffset.UtcNow.AddDays(1)
             });
-
-            return true;
+            
+            return type ;
         }
         catch (Exception ex)
         {

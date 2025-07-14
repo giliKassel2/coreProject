@@ -18,15 +18,17 @@ public class LoginController : ControllerBase
 
     // פעולה לאימות המשתמש
     [HttpPost]
-    public IActionResult Login(User user)
+    public IActionResult Login([FromBody] User user)
     {
         System.Console.WriteLine("start login post----");
-        if (loginService.Login(user, HttpContext))
+        //UserContextService userContext = new UserContextService( a);
+        var t = loginService.Login(user, HttpContext);
+        if (t>=0)
         {
             //  return Redirect("\\index.html");
             var token = HttpContext.Response.Headers["Set-Cookie"];
-            return Ok(new { success = true, cookie = token });
-            
+            return Ok(new { success = true, cookie = token, type = t });
+
         }
         return NotFound(); // החזר את העמוד אם האימות נכשל
     }

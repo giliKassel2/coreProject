@@ -17,9 +17,20 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ UserId: userId, Password: password })
+            body: JSON.stringify({userId: userId, password: password })
         });
-
+        if (response.status === 401) {
+            errorDiv.textContent = "שם משתמש או סיסמה לא נכונים";
+            return;
+        }
+        if (response.status === 403) {
+            errorDiv.textContent = "אין לך הרשאות להתחבר";
+            return;
+        }
+        if (response.status === 500) {
+            errorDiv.textContent = "שגיאה בשרת, נסה שוב מאוחר יותר";
+            return;
+        }
         if (!response.ok) {
             errorDiv.textContent = "שם משתמש או סיסמה לא נכונים";
             return;
@@ -28,12 +39,29 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         const data = await response.json();
 
         if (data.success) {
+            switch (data.type) {
+                case 0:
+                    window.location.href ='/principal.html'
+                    alert("admin");
+                    break;
+                case 1:
+                    window.location.href ='/teacher.html'
+                    alert("teacher")
+                    break;
+                case 2:
+                    window.location.href ='/student.html'
+                    break;
+                default:
+                    window.location.href ='login.html'
+                    break;
+            }
+
             // לפי התפקיד redirect לעמוד המתאים
             // כאן נשמור את הטוקן אם תרצי (אבל יש cookie HTTP-only שמנוהל בשרת)
 
             // לדוגמה: redirect לפי סוג משתמש
             // את זה אפשר לשפר בהמשך כשנשיג את סוג המשתמש
-            window.location.href = '/index.html'; // בשלב הזה נשלח לדף הראשי - נשנה בהמשך
+    
         } else {
             errorDiv.textContent = "אירעה שגיאה בהתחברות";
         }

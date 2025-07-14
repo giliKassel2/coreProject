@@ -1,82 +1,162 @@
+/* כללי */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    direction: rtl;
-    background: #f9f9f9;
-    color: #333;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #f5f2ec, #e9e3d7);
+  color: #333;
 }
 
-header, section {
-    margin-bottom: 30px;
+h1, h2 {
+  color: #3e4c39;
+  text-align: center;
+  margin-top: 1rem;
 }
 
-#teacherInfo p {
-    font-size: 1.2em;
-    margin: 5px 0;
+/* HEADER */
+.site-header {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
 
+.site-header img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  filter: brightness(60%);
+}
+
+.site-header h1 {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  color: #fff;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.main-nav {
+  background-color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  padding: 10px 0;
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.main-nav ul li a:hover {
+  background-color: #5e7550;
+}
+
+/* Teacher Info */
+#teacherInfo {
+  background-color: #ffffff;
+  max-width: 500px;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  text-align: right;
+  direction: rtl;
+}
+
+/* כפתורי כיתות */
 #classesButtons {
-    margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 15px;
 }
 
 #classesButtons button {
-    margin: 5px 8px 5px 0;
-    padding: 8px 15px;
-    border: none;
-    background-color: #3498db;
-    color: white;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #5e7550;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-#classesButtons button:hover, #classesButtons button.active {
-    background-color: #2980b9;
+#classesButtons button:hover {
+  background-color: #4c6140;
+}
+
+/* טבלת תלמידים */
+#studentsSection {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 #studentsTable {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  direction: rtl;
 }
 
 #studentsTable th, #studentsTable td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
+  padding: 0.8rem;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
 }
 
-#studentsTable tr:nth-child(even) {
-    background-color: #f2f2f2;
+#studentsTable th {
+  background-color: #5e7550;
+  color: white;
 }
 
-#studentsTable tr:hover {
-    background-color: #ddd;
+#studentsTable td button {
+  padding: 0.4rem 0.8rem;
+  background-color: #4c6140;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-#studentsTable button {
-    padding: 5px 10px;
-    border: none;
-    background-color: #27ae60;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
+#studentsTable td button:hover {
+  background-color: #3b4d32;
 }
 
-#studentsTable button.absent {
-    background-color: #c0392b;
-}
-
+/* כפתור יציאה */
 #logoutBtn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  display: block;
+  margin: 2rem auto;
+  padding: 0.7rem 1.5rem;
+  background-color: #a0522d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 #logoutBtn:hover {
-    background-color: #c0392b;
+  background-color: #8b4513;
 }

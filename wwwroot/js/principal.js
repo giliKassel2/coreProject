@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // טוען את רשימת התלמידים מהשרת
     async function loadStudents() {
         try {
-            const response = await fetch("/api/students", { credentials: "include" });
+            const response = await fetch("/api/Student", { credentials: "include" });
             if (!response.ok) {
                 alert("שגיאה בטעינת תלמידים");
                 return;

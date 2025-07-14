@@ -14,7 +14,7 @@ public class GenericService<T> : IGenericService<T>
     {
         this._entities = entities ?? new List<T>();
         this.filePath = filePath;
-      
+        
     }
 
 
@@ -25,8 +25,9 @@ public class GenericService<T> : IGenericService<T>
 
     public T? Get(Func<T, bool> predicate)
     {
+        System.Console.WriteLine("in get");
         return _entities.FirstOrDefault(predicate);
-    }
+    } 
 
     public T Create(T entity)
     {
