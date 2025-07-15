@@ -22,6 +22,7 @@ namespace myProject.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Student>> Get()
         {
+            System.Console.WriteLine("start get teachers post");
             if (service.Get() != null)
                 return service.Get();
             return NotFound();
@@ -78,13 +79,17 @@ namespace myProject.Controllers
         public ActionResult<Student> GetCurrentStudent()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.PrimarySid)?.Value;
+            System.Console.WriteLine(userIdClaim+".............");
             if (!int.TryParse(userIdClaim, out int userId))
+            {
+                System.Console.WriteLine("Unauthorized");
                 return Unauthorized();
-
+            }
+                
             var student = service.Get(s => s.Id == userId);
             if (student == null)
                 return NotFound();
-
+            
             return student;
         }
 }

@@ -14,7 +14,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     // פונקציה לשליפת פרטי המורה כולל כיתות
     async function fetchTeacherData() {
         try {
-            const response = await fetch("/api/teachers/me", { credentials: "include" });
+            const response = await fetch("/api/Teachers/me", {
+            credentials: "include",
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
             if (!response.ok) {
                 alert("שגיאה בקבלת פרטי המורה");
                 //window.location.href = "/login.html";
@@ -26,12 +32,20 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error(err);
             return null;
         } 
+        
+        return response.json();
     }
 
     // פונקציה לקבלת תלמידים לפי כיתה
     async function fetchStudentsByClass(className) {
         try {
-            const response = await fetch(`/api/student?class=${encodeURIComponent(className)}`, { credentials: "include" });
+            const response = await fetch(`/api/Student?class=${encodeURIComponent(className)}`, { 
+            credentials: "include",
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+             });
             if (!response.ok) {
                 alert("שגיאה בקבלת תלמידים");
                 return [];
@@ -73,6 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         studentsTableBody.innerHTML = "";
         if (!students.length) {
             studentsTableBody.innerHTML = `<tr><td colspan="3">אין תלמידים בכיתה זו</td></tr>`;
+            studentsSection.style.display = "none";
             return;
         }
 
@@ -133,7 +148,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // כאן יש לקרוא ל-API לעדכון נוכחות - נניח endpoint: /api/student/{id}/presence
         try {
-            const response = await fetch(`/api/student/${student.Id}/presence`, {
+            const response = await fetch(`/api/Student/${student.Id}/presence`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -162,11 +177,40 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // הפעלה ראשונית
-    teacherData = await fetchTeacherData();
-    if (!teacherData) return;
 
-    teacherNameSpan.textContent = teacherData.Name;
-    teacherSubjectSpan.textContent = teacherData.Subject;
+    async function main() {
+        const teacherData = await fetchTeacherData();
+        if (!teacherData) return;
+        console.log(teacherData);
+            
+        teacherNameSpan.innerHTML ="\t"+ teacherData.name;
+        teacherSubjectSpan.innerText ="\t"+ teacherData.subject;
+
+        // אם יש כיתות, נרנדר כפתורים
+        if (teacherData.clases && teacherData.clases.length > 0) {
+            renderClassesButtons(teacherData.clases);
+            // // אם יש כיתה ראשונה, נבחר אותה אוטומטית
+            // if (teacherData.clases.length > 0) {
+            //     currentClass = teacherData.clases[0];
+            //     setActiveClassButton(classesButtonsDiv.children[0]);
+            //     selectedClassSpan.textContent = currentClass;
+            //     studentsInClass = await fetchStudentsByClass(currentClass);
+            //     renderStudentsTable(studentsInClass);
+            //     studentsSection.style.display = "block";
+            // }
+        }
+    }
+
+main();
+
+    
+    
+    if (!teacherData){
+        console.log("not teacer data!!");
+        
+         return;
+    }
+    
 
     renderClassesButtons(teacherData.Clases);
 });

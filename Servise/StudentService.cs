@@ -29,10 +29,11 @@ public class StudentService : GenericService<Student>
                 return allStudents;
 
             case "Teacher":
-
-                return allStudents
-                        .Where(s => userContext.Clases.Contains(s.Clas))
+                System.Console.WriteLine(allStudents.Where(s => userContext.Clases.Contains(s.Clas))
+                        .ToList().Count);
+                return allStudents.Where(s => userContext.Clases.Contains(s.Clas))
                         .ToList();
+                
                         
             case "Student":
                 return allStudents

@@ -42,11 +42,11 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
             switch (data.type) {
                 case 0:
                     window.location.href ='/principal.html'
-                    alert("admin");
+                    
                     break;
                 case 1:
                     window.location.href ='/teacher.html'
-                    alert("teacher")
+                    
                     break;
                 case 2:
                     window.location.href ='/student.html'

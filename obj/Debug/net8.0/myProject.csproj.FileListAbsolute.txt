@@ -96,7 +96,6 @@ C:\Users\user1\Desktop\core\הפרויקט\myProject\bin\Debug\net8.0\appsetting
 C:\Users\user1\Desktop\core\הפרויקט\myProject\bin\Debug\net8.0\Data\classData.json
 C:\Users\user1\Desktop\core\הפרויקט\myProject\bin\Debug\net8.0\Data\StudentData.json
 C:\Users\user1\Desktop\core\הפרויקט\myProject\bin\Debug\net8.0\Data\TeacherData.json
-C:\Users\user1\Desktop\core\הפרויקט\myProject\bin\Debug\net8.0\StudentData.json
 C:\Users\user1\Desktop\core\הפרויקט\myProject\bin\Debug\net8.0\myProject.staticwebassets.runtime.json
 C:\Users\user1\Desktop\core\הפרויקט\myProject\bin\Debug\net8.0\myProject.exe
 C:\Users\user1\Desktop\core\הפרויקט\myProject\bin\Debug\net8.0\myProject.deps.json

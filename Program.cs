@@ -23,6 +23,19 @@ void ConfigureServices(IServiceCollection services)
         cfg.RequireHttpsMetadata = false;
         cfg.TokenValidationParameters = 
             CreateTokenService.GetTokenValidationParameters();
+
+        cfg.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var tokenFromCookie = context.Request.Cookies["AuthToken"];
+                if (!string.IsNullOrEmpty(tokenFromCookie))
+                {
+                    context.Token = tokenFromCookie;
+                }
+                return Task.CompletedTask;
+            }
+        };
     });
 
     services.AddAuthorization(cfg =>

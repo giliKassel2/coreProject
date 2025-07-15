@@ -42,7 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // טוען את רשימת התלמידים מהשרת
     async function loadStudents() {
         try {
-            const response = await fetch("/api/Student", { credentials: "include" });
+            const response = await fetch("/api/student", {
+             credentials: "include",
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            } });
+
             if (!response.ok) {
                 alert("שגיאה בטעינת תלמידים");
                 return;
@@ -58,7 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // טוען את רשימת המורים מהשרת
     async function loadTeachers() {
         try {
-            const response = await fetch("/api/teachers", { credentials: "include" });
+            const response = await fetch("/api/Teachers", {
+            credentials: "include",
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }});
             if (!response.ok) {
                 alert("שגיאה בטעינת מורים");
                 return;
@@ -224,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // פונקציה לעדכון פרטי תלמיד/מורה בשרת
     async function updateData(type, id, updatedData) {
         try {
-            const response = await fetch(`/api/${type}s/${id}`, {
+            const response = await fetch(`/api/${type}/${id}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -251,4 +262,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // התחלה - נטען את רשימת התלמידים כברירת מחדל
     btnStudents.click();
+
+    students =  loadStudents();
+    teachers = loadTeachers();
+    
+    if (!teacherData){
+        console.log("not teacer data!!");
+        
+         return;
+    }
 });
