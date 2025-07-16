@@ -39,8 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "/login.html";
     });
 
-    // טוען את רשימת התלמידים מהשרת
     async function loadStudents() {
+            console.log("טוען תלמידים...");
+
         try {
             const response = await fetch("/api/student", {
              credentials: "include",
@@ -54,6 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
             const students = await response.json();
+                   // console.log("students:", students);
+
             renderStudentsTable(students);
         } catch (err) {
             alert("שגיאה בשרת");
@@ -64,6 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // טוען את רשימת המורים מהשרת
     async function loadTeachers() {
         try {
+            console.log("טוען מורים...");
+
             const response = await fetch("/api/Teachers", {
             credentials: "include",
             method: 'GET',
@@ -75,6 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
             const teachers = await response.json();
+            console.log("teachers:", teachers);
+            
             renderTeachersTable(teachers);
         } catch (err) {
             alert("שגיאה בשרת");
@@ -90,13 +97,14 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         students.forEach(student => {
+
             const tr = document.createElement("tr");
 
             const nameTd = document.createElement("td");
-            nameTd.textContent = student.Name;
+            nameTd.textContent = student.name;
 
             const classTd = document.createElement("td");
-            classTd.textContent = student.Class || "-";
+            classTd.textContent = student.clas || "-";
 
             const detailsTd = document.createElement("td");
             const detailsBtn = document.createElement("button");
@@ -131,16 +139,18 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         teachers.forEach(teacher => {
+            console.log(teacher); // בדוק איך נראים האובייקטים
+
             const tr = document.createElement("tr");
 
             const nameTd = document.createElement("td");
-            nameTd.textContent = teacher.Name;
+            nameTd.textContent = teacher.name;
 
             const subjectTd = document.createElement("td");
-            subjectTd.textContent = teacher.Subject || "-";
+            subjectTd.textContent = teacher.subject || "-";
 
             const classesTd = document.createElement("td");
-            classesTd.textContent = (teacher.Clases && teacher.Clases.length > 0) ? teacher.Clases.join(", ") : "-";
+            classesTd.textContent = (teacher.clases && teacher.clases.length > 0) ? teacher.clases.join(", ") : "-";
 
             const detailsTd = document.createElement("td");
             const detailsBtn = document.createElement("button");
@@ -190,52 +200,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // הצגת טופס עריכה בסיסי (אפשר להרחיב)
     function showEditForm(type, data) {
-        detailsContent.innerHTML = `
-            <form id="editForm">
-                <label>שם:
-                    <input type="text" name="Name" value="${data.Name}" required />
+    // בנה את הטופס
+    console.log(data);
+    
+    let formHtml = `
+        <form id="editForm">
+            <label>שם:
+                <input type="text" name="Name" value="${ data.name || ''}" required />
+            </label><br/>
+            ${type === "student" ? `
+                <label>כיתה:
+                    <input type="text" name="Class" value="${ data.clas || ''}" />
                 </label><br/>
-                ${type === "student" ? `
-                    <label>כיתה:
-                        <input type="text" name="Class" value="${data.Class || ''}" />
-                    </label><br/>
-                ` : ''}
-                ${type === "teacher" ? `
-                    <label>מקצוע:
-                        <input type="text" name="Subject" value="${data.Subject || ''}" />
-                    </label><br/>
-                    <label>כיתות (מופרדות בפסיקים):
-                        <input type="text" name="Clases" value="${(data.Clases && data.Clases.join(", ")) || ''}" />
-                    </label><br/>
-                ` : ''}
-                <button type="submit">שמור</button>
-            </form>
-        `;
-        detailsSection.style.display = "block";
+            ` : ''}
+            ${type === "teacher" ? `
+                <label>מקצוע:
+                    <input type="text" name="Subject" value="${ data.subject || ''}" />
+                </label><br/>
+                <label>כיתות (מופרדות בפסיקים):
+                    <input type="text" name="Clases" value="${( data.clases || []).join ? (data.Clases || data.clases).join(', ') : ''}" />
+                </label><br/>
+            ` : ''}
+            <button type="submit">שמור</button>
+        </form>
+    `;
 
-        const form = document.getElementById("editForm");
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const formData = new FormData(form);
-            let updatedData = {};
-            formData.forEach((value, key) => {
-                updatedData[key] = value;
-            });
+    // הצג במודאל
+    document.getElementById("editModalBody").innerHTML = formHtml;
+    document.getElementById("editModal").style.display = "block";
 
-            // המרה למערך עבור כיתות (למורה)
-            if (type === "teacher" && updatedData.Clases) {
-                updatedData.Clases = updatedData.Clases.split(",").map(c => c.trim());
-            }
+    // סגירה
+    document.getElementById("closeEditModal").onclick = () => {
+        document.getElementById("editModal").style.display = "none";
+    };
 
-            // קריאה לעדכון בשרת
-            await updateData(type, data.Id, updatedData);
-        });
-    }
+    // שליחת טופס
+    document.getElementById("editForm").onsubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        let updatedData = {};
+        formData.forEach((value, key) => { updatedData[key] = value; });
+        if (type === "teacher" && updatedData.Clases) {
+            updatedData.Clases = updatedData.Clases.split(",").map(c => c.trim());
+        }
+        await updateData(type, data.id, updatedData);
+        document.getElementById("editModal").style.display = "none";
+    };
+}
 
     // פונקציה לעדכון פרטי תלמיד/מורה בשרת
     async function updateData(type, id, updatedData) {
+        console.log("עדכון נתונים:", updatedData);
+        
+        let path;
+        if(type === "teacher") {
+            path = "/api/Teachers";
+        } else if(type === "student") {
+            path = "/api/student";
+        }
         try {
-            const response = await fetch(`/api/${type}/${id}`, {
+            const response = await fetch(`${path}/${id}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -266,9 +290,9 @@ document.addEventListener("DOMContentLoaded", () => {
     students =  loadStudents();
     teachers = loadTeachers();
     
-    if (!teacherData){
-        console.log("not teacer data!!");
+    // if (!teacherData){
+    //     console.log("not teacer data!!");
         
-         return;
-    }
+    //      return;
+    // }
 });

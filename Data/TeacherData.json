@@ -1,9 +1,9 @@
 [
   {
     "Id": 1000,
-    "HashPassword": "$2a$11$w8Qw8p7Qw6Qw8p7Qw6QwOeQw8p7Qw8p7Qw8p7Qw8p7Qw8p7Qw8p7e",
+    "HashPassword": "1",
     "Name": "admin",
-    "Subject": "",
+    "Subject": null,
     "Clases": []
   },
   {

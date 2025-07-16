@@ -8,97 +8,129 @@ namespace myProject.Services;
 public class LoginService
 {
     private readonly PasswordService passwordService = new PasswordService();
-    private readonly TeacherService teacherService ;
+    private readonly TeacherService teacherService;
     private readonly StudentService studentService;
 
     public LoginService()
     {
-
         var basePath = Path.Combine(Directory.GetCurrentDirectory(), "Data");
 
-        teacherService = new TeacherService(
-            JsonManageService<Teacher>.LoadFromJson(Path.Combine(basePath, "TeacherData.json")),
-            Path.Combine(basePath, "TeacherData.json")
-        );
+        try
+        {
+            var teachers = JsonManageService<Teacher>.LoadFromJson(Path.Combine(basePath, "TeacherData.json"));
+            teacherService = new TeacherService(teachers, Path.Combine(basePath, "TeacherData.json"));
+        }
+        catch
+        {
+            teacherService = new TeacherService(new List<Teacher>(), Path.Combine(basePath, "TeacherData.json"));
+        }
 
-        studentService = new StudentService(
-            JsonManageService<Student>.LoadFromJson(Path.Combine(basePath, "StudentData.json")),
-            Path.Combine(basePath, "StudentData.json")
-        );
-        System.Console.WriteLine("LoginService initialized");
-
+        try
+        {
+            var students = JsonManageService<Student>.LoadFromJson(Path.Combine(basePath, "StudentData.json"));
+            studentService = new StudentService(students, Path.Combine(basePath, "StudentData.json"));
+        }
+        catch
+        {
+            studentService = new StudentService(new List<Student>(), Path.Combine(basePath, "StudentData.json"));
+        }
     }
 
     public int Login(User user, HttpContext httpContext)
     {
-        Teacher? RequestTeacher = null;
-        Student? RequestStudent = null;
-        List<Claim> claims;
-        int type = -1;
-      
-            RequestTeacher = teacherService.Get(t => t.Id == int.Parse(user.UserId))?? null;
-            RequestStudent = studentService.Get(s => s.Id == int.Parse(user.UserId))?? null;
-            System.Console.WriteLine($"userId: {user.UserId}, password: {user.Password}");
-        
-        if ((RequestTeacher != null && passwordService.VerifyPassword(user.Password, RequestTeacher.HashPassword)) || user.UserId == "1000")
-            {
-                Console.WriteLine("Teacher found and password verified.");
-                claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.PrimarySid, user.UserId)
-            };
+        if (!int.TryParse(user.UserId, out int userIdInt))
+            return -1;
 
-                if (RequestTeacher != null && RequestTeacher.Name == "admin")
+        Teacher? teacher = null;
+        Student? student = null;
+        List<Claim> claims = new();
+        int type = -1;
+
+        try
+        {
+            // אם המשתמש הוא ID 1000 - דלג על בדיקת סיסמה, המשך ישירות לבדוק אם הוא מורה
+            if (userIdInt == 1000)
+            {
+                teacher = teacherService.Get(t => t.Id == 1000);
+                if (teacher?.Name?.ToLower() == "admin")
                 {
+                    claims.Add(new Claim(ClaimTypes.PrimarySid, user.UserId));
                     claims.Add(new Claim("type", "principal"));
-                    System.Console.WriteLine("!!Admin logged in!!");
                     type = 0;
                 }
                 else
                 {
-                    claims.Add(new Claim("type", "Teacher"));
-                    claims.Add(new Claim("clases", string.Join(",", RequestTeacher.Clases.Select(c => c.ToString())))); // אם יש ClassId
-                    System.Console.WriteLine($"Teacher logged in with classes: {string.Join(", ", RequestTeacher.Clases)}");
-                    type = 1;
+                    return -1;
                 }
-
-                // כאן אפשר להוסיף Claim של רשימת כיתות אם צריך
-            }
-            else if (RequestStudent != null && passwordService.VerifyPassword(user.Password, RequestStudent.HashPassword))
-            {
-                Console.WriteLine("Student found and password verified.");
-                claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.PrimarySid, user.UserId),
-                new Claim("type", "Student"),
-                new Claim("clas", RequestStudent.Clas.ToString()) // אם יש ClassId
-                
-            };
-                type = 2;
             }
             else
             {
-                Console.WriteLine("not found id or password");
-                return -1;
+                teacher = teacherService.Get(t =>
+                    t.Id == userIdInt &&
+                    !string.IsNullOrWhiteSpace(t.HashPassword) &&
+                    passwordService.VerifyPassword(user.Password, t.HashPassword)
+                );
+
+                if (teacher != null)
+                {
+                    claims.Add(new Claim(ClaimTypes.PrimarySid, user.UserId));
+                    claims.Add(new Claim("type", "Teacher"));
+
+                    if (teacher.Clases != null && teacher.Clases.Any())
+                    {
+                        claims.Add(new Claim("clases", string.Join(",", teacher.Clases)));
+                    }
+
+                    type = 1;
+                }
+                else
+                {
+                    student = studentService.Get(s =>
+                        s.Id == userIdInt &&
+                        !string.IsNullOrWhiteSpace(s.HashPassword) &&
+                        passwordService.VerifyPassword(user.Password, s.HashPassword)
+                    );
+
+                    if (student != null)
+                    {
+                        claims.Add(new Claim(ClaimTypes.PrimarySid, user.UserId));
+                        claims.Add(new Claim("type", "Student"));
+                        claims.Add(new Claim("clas", student.Clas?.ToString() ?? ""));
+                        type = 2;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
             }
+        }
+        catch
+        {
+            return -1;
+        }
 
         try
         {
             var token = CreateTokenService.GetToken(claims);
             var tokenString = CreateTokenService.WriteToken(token);
 
-            httpContext.Response.Cookies.Append("AuthToken", tokenString, new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true, 
-                Expires = DateTimeOffset.UtcNow.AddDays(1)
-            });
-            
-            return type ;
+            httpContext.Response.Cookies.Append(
+                "AuthToken",
+                tokenString,
+                new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = httpContext.Request.IsHttps,
+                    Expires = DateTimeOffset.UtcNow.AddDays(1),
+                }
+            );
+
+            return type;
         }
-        catch (Exception ex)
+        catch
         {
-            throw new Exception($"Login error: {ex.Message}");
+            return -1;
         }
     }
 }

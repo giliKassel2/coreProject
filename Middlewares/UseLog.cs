@@ -5,6 +5,7 @@ namespace myProject.Middlewares;
 
 public class UseLog
 {
+    private static readonly object _lockObj = new object();
     private RequestDelegate next;
 
     public UseLog(RequestDelegate next)
@@ -22,12 +23,17 @@ public class UseLog
         string filePath = Path.Combine(Directory.GetCurrentDirectory(), "GILI_LOG/log.txt");
         if (!File.Exists(filePath))
         {
-            using (StreamWriter writer = new StreamWriter(filePath, true))
+            lock(_lockObj)
+            {
+                using (StreamWriter writer = new StreamWriter(filePath, true))
             {
                 writer.WriteLine("log file created");
             }
+            }
+            
         }
         try{
+             lock(_lockObj){
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
             string status = context.Response.StatusCode.ToString();
@@ -36,7 +42,7 @@ public class UseLog
             writer.WriteLine($"{context.Request.Path}.{context.Request.Method} took {stoper.ElapsedMilliseconds}ms. "
             +$"status:{status}  Success: {context.Items["success"]}");
          
-        }
+        }}
         }
         catch (Exception ex)
         {

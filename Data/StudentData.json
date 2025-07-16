@@ -1,39 +1,10 @@
 [
   {
-    "HashPassword": "123",
-    "Id": 100,
-    "Name": "gili kassel",
-    "Clas": null,
-    "presence": [
-      {
-        "Date": "2023-10-01T00:00:00",
-        "Lesson": null,
-        "IsPresent": false
-      },
-      {
-        "Date": "2023-10-02T00:00:00",
-        "Lesson": null,
-        "IsPresent": false
-      }
-    ]
-  },
-  {
-    "HashPassword": "456",
+    "HashPassword": null,
     "Id": 101,
-    "Name": "dani levi",
+    "Name": null,
     "Clas": null,
-    "presence": [
-      {
-        "Date": "2023-10-01T00:00:00",
-        "Lesson": null,
-        "IsPresent": false
-      },
-      {
-        "Date": "2023-10-02T00:00:00",
-        "Lesson": null,
-        "IsPresent": false
-      }
-    ]
+    "presence": null
   },
   {
     "HashPassword": "789",

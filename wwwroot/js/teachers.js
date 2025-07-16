@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async () => {
+//document.addEventListener("DOMContentLoaded", async () => {
     const teacherNameSpan = document.getElementById("teacherName");
     const teacherSubjectSpan = document.getElementById("teacherSubject");
     const classesButtonsDiv = document.getElementById("classesButtons");
@@ -182,35 +182,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         const teacherData = await fetchTeacherData();
         if (!teacherData) return;
         console.log(teacherData);
-            
-        teacherNameSpan.innerHTML ="\t"+ teacherData.name;
-        teacherSubjectSpan.innerText ="\t"+ teacherData.subject;
+        
+    console.log(teacherData.name)
+    teacherNameSpan.innerHTML = teacherData.name;
+   // console.log(teacherData.subject);
+    teacherSubjectSpan.innerHTML =teacherData.subject;
 
         // אם יש כיתות, נרנדר כפתורים
         if (teacherData.clases && teacherData.clases.length > 0) {
             renderClassesButtons(teacherData.clases);
-            // // אם יש כיתה ראשונה, נבחר אותה אוטומטית
-            // if (teacherData.clases.length > 0) {
-            //     currentClass = teacherData.clases[0];
-            //     setActiveClassButton(classesButtonsDiv.children[0]);
-            //     selectedClassSpan.textContent = currentClass;
-            //     studentsInClass = await fetchStudentsByClass(currentClass);
-            //     renderStudentsTable(studentsInClass);
-            //     studentsSection.style.display = "block";
-            // }
         }
+
     }
+    main();
 
-main();
+
 
     
     
-    if (!teacherData){
-        console.log("not teacer data!!");
-        
-         return;
-    }
-    
+  
 
-    renderClassesButtons(teacherData.Clases);
-});
+   // renderClassesButtons(teacherData.Clases);
+//});
