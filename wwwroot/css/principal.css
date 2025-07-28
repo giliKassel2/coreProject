@@ -3,6 +3,37 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to bottom, #f3eee3, #e5ded0);
   color: #333;
+  direction: rtl;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.page-header h1 {
+  margin: 0 0 1rem 0;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.page-header button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-header button:hover {
+  background: white;
+  color: #2c3e50;
 }
 
 .site-header {
@@ -160,5 +191,56 @@ button:hover {
   to {
     transform: translate(-50%, 0);
     opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .site-header h1 {
+    font-size: 2rem;
+  }
+  
+  .main-nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  table {
+    font-size: 0.9rem;
+  }
+  
+  th, td {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    padding: 1rem;
+  }
+  
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .site-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  table {
+    font-size: 0.8rem;
+  }
+  
+  .main-nav ul {
+    gap: 5px;
+  }
+  
+  .main-nav ul li a {
+    padding: 5px 8px;
+    font-size: 0.9rem;
   }
 }

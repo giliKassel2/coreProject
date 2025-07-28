@@ -82,3 +82,44 @@
     transform: scale(1);
   }
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .site-header .header-content {
+    height: 150px;
+  }
+  
+  .site-header h1 {
+    font-size: 2rem;
+    top: 30px;
+  }
+  
+  .main-nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .main-nav {
+    padding: 8px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header .header-content {
+    height: 120px;
+  }
+  
+  .site-header h1 {
+    font-size: 1.5rem;
+    top: 20px;
+  }
+  
+  .main-nav ul {
+    gap: 5px;
+  }
+  
+  .main-nav ul li a {
+    padding: 5px 8px;
+    font-size: 0.9rem;
+  }
+}
