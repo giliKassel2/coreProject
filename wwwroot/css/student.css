@@ -4,6 +4,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to bottom, #f7f3ec, #eae2d8);
   color: #333;
+  direction: rtl;
 }
 
 .container {
@@ -110,4 +111,62 @@ h2, h3 {
 
 .main-nav ul li a:hover {
   background-color: #5e7550;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem auto;
+    padding: 1.5rem;
+  }
+  
+  .site-header h1 {
+    font-size: 2rem;
+  }
+  
+  .main-nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #presenceTable {
+    font-size: 0.9rem;
+  }
+  
+  #presenceTable th,
+  #presenceTable td {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+  
+  .site-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+  }
+  
+  #presenceTable {
+    font-size: 0.8rem;
+  }
+  
+  .main-nav ul {
+    gap: 5px;
+  }
+  
+  .main-nav ul li a {
+    padding: 5px 8px;
+    font-size: 0.9rem;
+  }
 }

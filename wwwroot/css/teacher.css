@@ -4,6 +4,32 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to bottom, #f5f2ec, #e9e3d7);
   color: #333;
+  direction: rtl;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.page-header h1 {
+  margin: 0 0 1rem 0;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+#teacherInfo {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+#teacherInfo p {
+  margin: 0.5rem 0;
 }
 
 h1, h2 {
@@ -159,4 +185,65 @@ h1, h2 {
 
 #logoutBtn:hover {
   background-color: #8b4513;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .site-header h1 {
+    font-size: 2rem;
+  }
+  
+  .main-nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #studentsTable {
+    font-size: 0.9rem;
+  }
+  
+  #studentsTable th,
+  #studentsTable td {
+    padding: 0.5rem;
+  }
+  
+  #classesButtons {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header {
+    padding: 1rem;
+  }
+  
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .site-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  #studentsTable {
+    font-size: 0.8rem;
+  }
+  
+  .main-nav ul {
+    gap: 5px;
+  }
+  
+  .main-nav ul li a {
+    padding: 5px 8px;
+    font-size: 0.9rem;
+  }
+  
+  #teacherInfo {
+    font-size: 1rem;
+  }
 }
