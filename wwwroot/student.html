@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -34,10 +34,85 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- שורות נוכחות ימולאו כאן -->
-            </tbody>
+                שורות נוכחות ימולאו כאן -->
+            <!-- </tbody>
         </table>
         <button id="logoutBtn">התנתק</button>
+    </div>
+
+    <script src="./js/student.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>נוכחות תלמיד</title>
+    <link rel="stylesheet" href="/css/student.css" />
+</head>
+<body>
+    <!-- הודעת טעינה -->
+    <div id="loadingMessage">
+        <div class="loading-content">
+            <div class="loading-text">טוען נתוני תלמיד...</div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <header class="site-header">
+        <div class="header-content">
+            <h1>OUR SCHOOL</h1>
+            <img src="./imges/class_room.jpg" alt="תמונה של כיתה" />
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/index.html">בית</a></li>
+                <li><a href="/students.html">תלמידים</a></li>
+                <li><a href="/teachers.html">מורים</a></li>
+                <li><a href="/admin.html">ניהול</a></li>
+                <li><a href="/login.html">התנתקות</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container" id="mainContainer">
+        <div id="studentHeader">
+            <h2>שלום, <span id="studentName">...</span></h2>
+            <div id="studentInfo">
+                <span id="studentClass"></span>
+            </div>
+        </div>
+        
+        <h3>נוכחות לשיעורים</h3>
+        
+        <!-- סטטיסטיקות מהירות -->
+        <div id="statsContainer">
+        </div>
+        
+        <table id="presenceTable">
+            <thead>
+                <tr>
+                    <th>תאריך</th>
+                    <th>שיעור</th>
+                    <th>נוכחות</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- הנתונים ייטענו דינמית כאן -->
+            </tbody>
+        </table>
+        
+        <button id="logoutBtn">התנתק</button>
+    </div>
+
+    <!-- הודעת שגיאה -->
+    <div id="errorContainer">
+        <div class="error-content">
+            <h3>שגיאה בטעינת הנתונים</h3>
+            <p id="errorMessage">לא ניתן לטעון את נתוני התלמיד</p>
+            <button onclick="window.location.reload()" class="retry-btn">נסה שוב</button>
+        </div>
     </div>
 
     <script src="./js/student.js"></script>
