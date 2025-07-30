@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xWQFHBo6n9Q=",
+  "dgSpecHash": "GLKHXs74jns=",
   "success": true,
   "projectFilePath": "C:\\Users\\user1\\Desktop\\core\\הפרויקט\\myProject\\myProject.csproj",
   "expectedPackageFiles": [
@@ -24,12 +24,5 @@
     "C:\\Users\\user1\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\7.2.0\\swashbuckle.aspnetcore.swaggerui.7.2.0.nupkg.sha512",
     "C:\\Users\\user1\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.8.0\\system.identitymodel.tokens.jwt.8.8.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
-    }
-  ]
+  "logs": []
 }
