@@ -686,3 +686,5 @@
 /api/Teachers/me.GET took 134ms. status:200  Success: True
 /api/login.POST took 1031ms. status:200  Success: True
 /api/Teachers/me.GET took 34ms. status:200  Success: True
+/api/login.POST took 571ms. status:200  Success: True
+/api/Teachers/me.GET took 23ms. status:200  Success: True
