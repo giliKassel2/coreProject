@@ -1,28 +1,15 @@
 [
   {
-    "HashPassword": "123",
-    "Id": 100,
+    "HashPassword": null,
+    "Id": 0,
     "Name": "gili kassel",
-    "presence": [
-      {
-        "StudentId": 0,
-        "Date": "2023-10-01T00:00:00",
-        "Lesson": null,
-        "IsPresent": false
-      },
-      {
-        "StudentId": 0,
-        "Date": "2023-10-02T00:00:00",
-        "Lesson": null,
-        "IsPresent": false
-      }
-    ],
-    "Clas": null
+    "presence": null,
+    "Clas": "A"
   },
   {
     "HashPassword": "456",
-    "Id": 101,
-    "Name": "dani levi",
+    "Id": 0,
+    "Name": "chaya s",
     "presence": [
       {
         "StudentId": 0,
@@ -37,7 +24,7 @@
         "IsPresent": false
       }
     ],
-    "Clas": null
+    "Clas": "A"
   },
   {
     "HashPassword": "789",

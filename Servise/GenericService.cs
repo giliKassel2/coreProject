@@ -39,15 +39,17 @@ public class GenericService<T> : IGenericService<T>
     public T? Update(T entity, Func<T, bool> predicate)
     {
         var existingEntity = _entities.FirstOrDefault(predicate);
-        if (existingEntity != null)
+       foreach (var prop in typeof(T).GetProperties())
         {
-            var index = _entities.IndexOf(existingEntity);
-            _entities[index] = entity;
-            JsonManageService<T>.SaveToJson(filePath , _entities);
-            return existingEntity;
+            var newValue = prop.GetValue(entity);
+            if (newValue != null && !(newValue is string s && string.IsNullOrWhiteSpace(s)))
+            {
+                prop.SetValue(existingEntity, newValue);
+            }
         }
 
-        return default(T);
+        JsonManageService<T>.SaveToJson(filePath, _entities);
+        return existingEntity;
     }
 
     public bool Delete(Func<T, bool> predicate)

@@ -42,12 +42,13 @@
     "Clases": []
   },
   {
-    "Id": 2,
-    "HashPassword": "$2a$11$JCtYnLNq2W91ysi1hCNAy.Qvc5yortPfYM2H8XDB/7T376944MCaS",
-    "Name": "2",
-    "Subject": "2",
+    "Id": 0,
+    "HashPassword": null,
+    "Name": "!!!",
+    "Subject": "english",
     "Clases": [
-      "2"
+      "A",
+      "B"
     ]
   },
   {

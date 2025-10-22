@@ -130,3 +130,4 @@ C:\Users\user1\Desktop\core\הפרויקט\myProject\obj\Debug\net8.0\rjsmrazor.
 C:\Users\user1\Desktop\core\הפרויקט\myProject\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
 C:\Users\user1\Desktop\core\הפרויקט\myProject\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\user1\Desktop\core\הפרויקט\myProject\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\user1\Desktop\core\הפרויקט\myProject\obj\Debug\net8.0\swae.build.ex.cache

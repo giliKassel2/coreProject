@@ -49,7 +49,7 @@ namespace myProject.Controllers
 
         [Authorize(Policy = "principal")]
         [HttpPut("{id}")]
-        public ActionResult Put(int id, Teacher newTeacher)
+        public ActionResult Put(int id,[FromBody] Teacher newTeacher)
         {
             System.Console.WriteLine("id = " + id);
 

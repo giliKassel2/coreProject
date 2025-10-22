@@ -52,7 +52,7 @@ namespace myProject.Controllers
 
         [Authorize(Policy = "teacher")]
         [HttpPut("{id}")]
-        public ActionResult Put(int id, Student newStudent)
+        public ActionResult Put(int id,[FromBody] Student newStudent)
         {
             if (service.Update(newStudent, s => s.Id == id) == default(Student))
                 return NotFound();
