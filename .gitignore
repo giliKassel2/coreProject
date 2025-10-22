@@ -23,3 +23,5 @@ packages/
 
 # Ignore Visual Studio working files
 .vs/
+Data/
+GILI_LOG/
